@@ -1,0 +1,33 @@
+{% extends 'base_merchant.html' %}
+{% load static %}
+
+{% block ext_css %}
+    {{ block.super }}
+{% endblock %}
+
+{% block ext_js %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'chuan/merchant/js/login.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <form method="post" action="{% url 'merchant:login' %}" onsubmit="return parse_data()">
+
+            {% csrf_token %}
+
+            <p>{{ error_message }}</p>
+
+            <div class="form-group">
+                <label for="merchantName_input">商家名</label>
+                <input name="merchantName" type="text" class="form-control" id="merchantName_input" placeholder="商家名/邮箱">
+            </div>
+            <div class="form-group">
+                <label for="password_input">密码</label>
+                <input name="password" type="password" class="form-control" id="password_input" placeholder="请输入密码">
+            </div>
+
+            <button type="submit" class="btn btn-success btn-block">登录</button>
+        </form>
+    </div>
+{% endblock %}
