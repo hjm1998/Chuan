@@ -1,0 +1,126 @@
+.headerBox {
+    width: 100%;
+    height: 31px;
+    background: #F7F7F7;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.headerTop {
+    width: 1200px;
+    line-height: 31px;
+    margin: auto;
+}
+
+.headerTopRight {
+    min-width: 240px;
+    float: right;
+}
+
+.mine-login {
+    color: black;
+}
+
+.textTop {
+    color: #ce4735;
+}
+
+.headerTopRight a:hover {
+    color: #ce4735;
+    text-decoration: none;
+}
+
+.logoArea {
+    width: 1200px;
+    margin: 20px auto 25px
+}
+
+.logo {
+    float: left;
+}
+
+.logo-img {
+    height: 80px;
+    width: 200px;
+}
+
+.logoText {
+    float: left;
+    padding: 40px 0 0 16px;
+    font-size: 20px;
+}
+
+.logoText a {
+    color: #333;
+    text-decoration: none;
+}
+
+.search {
+    float: right;
+    padding: 35px 0 0 25px;
+    color: #333;
+}
+
+#horn {
+    height: 15px;
+    width: 15px;
+}
+
+.cart {
+    float: left;
+    margin: 0 0 0 75px;
+    width: 110px;
+    height: 30px;
+    background: #B81B22;
+}
+
+.cart-img {
+    margin: 5px;
+    float: left;
+    height: 20px;
+    width: 20px;
+}
+
+.cart-text {
+    padding: 7px 0 0 0;
+}
+
+#cart-aText {
+    color: white;
+    text-decoration: none;
+
+}
+
+.searchTab {
+    float: left;
+    /*width: 80%;*/
+    /*display: flex;*/
+    /*border: 1px solid red;*/
+}
+
+.searchTab input {
+    float: left;
+    flex: 4;
+    height: 30px;
+    outline: none;
+    border: 1px solid #B81B22;
+    box-sizing: border-box;
+/ / 盒子模型，怪异IE盒子模型， width = content + border * 2 + padding * 2 padding-left: 10 px;
+}
+
+.searchTab button {
+    float: right;
+    flex: 1;
+    height: 30px;
+    background-color: #B81B22;
+    color: white;
+    border-style: none;
+    outline: none;
+}
+
+.searchTab button i {
+    font-style: normal;
+}
+
+.searchTab button:hover {
+    font-size: 16px;
+}

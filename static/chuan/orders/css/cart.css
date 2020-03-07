@@ -1,0 +1,264 @@
+.w {
+    width: 1200px;
+    margin: auto;
+}
+
+.switch-cart {
+    float: left;
+    position: relative;
+    height: 26px;
+    overflow: hidden;
+}
+
+.switch-cart li.curr a {
+    color: #E2231A;
+}
+
+.switch-cart {
+    border-bottom: 1px solid red;
+}
+
+.number {
+    font-family: verdana;
+    font-size: 14px;
+}
+
+.cart-warp {
+    background: #fff;
+    margin-bottom: 20px;
+}
+
+.cart-main .cart-thead {
+    height: 43px;
+    line-height: 32px;
+    margin: 0 0 10px;
+    padding: 5px 0;
+    background: #f3f3f3;
+    border: 1px solid #e9e9e9;
+    border-top: 0;
+    position: relative;
+}
+
+.cart-main .cart-thead .column {
+    float: left;
+}
+
+.t-checkbox {
+    height: 22px;
+    line-height: 22px;
+    padding-top: 7px;
+    width: 132px;
+    padding-left: 11px;
+}
+
+.cart-checkbox {
+    position: relative;
+    z-index: 3;
+    float: left;
+    margin-right: 5px;
+}
+
+.cart-main .zccheckbox {
+    float: none;
+    position: relative;
+    z-index: 5;
+    vertical-align: middle;
+    _vertical-align: -1px;
+    margin: 0 3px 0 0;
+    padding: 0;
+    *left: -3px;
+}
+
+.t-goods {
+    width: 250px;
+}
+
+.t-props {
+    width: 175px;
+    height: 32px;
+    padding: 0 10px 0 20px;
+}
+
+.t-price {
+    width: 230px;
+    padding: 0 40px 0 80px;
+    text-align: center;
+}
+
+.t-quantity {
+    width: 150px;
+    padding-right: 40px;
+    text-align: center;
+}
+
+.t-sum {
+    width: 150px;
+    padding-right: 40px;
+    text-align: center;
+}
+
+.t-action {
+    width: 100px;
+    padding-right: 20px;
+    text-align: center;
+}
+
+.shop {
+    height: 30px;
+    line-height: 30px;
+    padding-left: 11px;
+    font-weight: 700;
+}
+
+.shop .shop-txt {
+    float: left;
+    width: 42%;
+}
+
+.shop .shop-name {
+    color: #666;
+    text-decoration: none;
+}
+
+.item-list {
+    border-style: solid;
+    border-width: 2px 1px 1px;
+    border-color: #aaa #f1f1f1 #f1f1f1;
+    background: #fff;
+    padding-bottom: 10px;
+    overflow: hidden;
+}
+
+.item-item .p-checkbox {
+    position: absolute;
+    z-index: 3;
+    left: 10px;
+    top: 0;
+    width: 30px;
+    min-height: 10px;
+    _height: 10px;
+}
+
+.item-full .item-form {
+    border-top: 1px solid #f1f1f1;
+    padding: 10px 0 1px 10px;
+}
+
+.p-img {
+    float: left;
+    width: 80px;
+    height: 80px;
+    border: 1px solid #eee;
+}
+
+.p-img img {
+    width: 80px;
+    height: 80px;
+}
+
+.item-msg {
+    float: left;
+    width: 250px;
+}
+
+.goods-item .p-name {
+    float: left;
+    height: 40px;
+    line-height: 20px;
+    padding: 0 0 0 20px;
+    overflow: hidden;
+}
+
+.p-props-new {
+    float: left;
+    width: 200px;
+    padding-left: 20px;
+}
+
+.p-price {
+    float: left;
+    width: 230px;
+    padding: 0 40px 0 80px;
+    text-align: center;
+}
+
+.p-quantity {
+    float: left;
+    width: 150px;
+    padding-right: 40px;
+    text-align: center;
+}
+
+.p-sum {
+    float: left;
+    width: 150px;
+    padding-right: 40px;
+    text-align: center;
+}
+
+.p-ops {
+    float: left;
+    width: 100px;
+    padding-right: 20px;
+    text-align: center;
+}
+
+.bottom-w {
+    width: 1200px;
+    margin: auto;
+    border: 1px solid #f3f3f3;
+}
+
+.bottom-check {
+    float: left;
+    height: 36px;
+    line-height: 36px;
+    padding: 10px;
+}
+
+.bottom-msg {
+    float: right;
+}
+
+.bottom-text {
+    float: left;
+    height: 43px;
+    line-height: 36px;
+    margin: 7px 40px 0 10px;
+}
+
+.bottom-price {
+    float: left;
+    height: 43px;
+    line-height: 36px;
+    margin: 7px 20px 0 10px;
+}
+
+.all-num {
+    font-size: 18px;
+    color: #E2231A;
+}
+
+.all-price {
+    font-size: 18px;
+    color: #E2231A;
+}
+
+.bottom-submit {
+    cursor: pointer;
+    float: left;
+    width: 94px;
+    height: 52px;
+    text-align: center;
+    line-height: 52px;
+    font-size: 18px;
+    color: white;
+    background: #e54346;
+}
+
+
+.clear:after {
+    content: '';
+    clear: both;
+    display: block;
+}

@@ -3,11 +3,20 @@
 
 {% block ext_css %}
     {{ block.super }}
+    <link rel="stylesheet" href="{% static 'chuan/user/css/mine.css' %}">
 {% endblock %}
 
-{% block content %}
-    {% if is_login %}
-        <p>{{ username }}</p>
-        <p><a href="{% url 'users:logout' %}">退出</a></p>
-    {% endif %}
+{% block ext_js %}
+    {{ block.super }}
+    <script src="{% static 'chuan/user/js/mine.js' %}"></script>
+{% endblock %}
+
+
+{% block main %}
+    {{ block.supwer }}
+    <div class="userIcon">
+        <a href="">
+            <img src="{% static 'img/icon/default_icon.png' %}" alt="">
+        </a>
+    </div>
 {% endblock %}

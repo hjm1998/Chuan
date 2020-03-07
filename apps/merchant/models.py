@@ -35,6 +35,7 @@ class Project(models.Model):
     p_target = models.IntegerField(verbose_name='目标金额')
     p_already = models.IntegerField(default=0, verbose_name='已筹金额')
     p_status = models.CharField(default='readyto', max_length=20, choices=STATUS_CHOICES, verbose_name='项目状态')
+    p_merchant = models.ForeignKey(Merchant, on_delete=models.CASCADE, verbose_name='商家ID')
 
 
     class Meta:
@@ -43,6 +44,7 @@ class Project(models.Model):
 
 class Goods(models.Model):
     g_title = models.CharField(max_length=32, verbose_name='商品名称')
+    g_img = models.ImageField(upload_to='project/%Y/%m/%d', verbose_name='商品图片')
     g_detail = models.TextField(verbose_name='商品详细')
     g_price = models.IntegerField(verbose_name='商品价格')
     g_sold = models.IntegerField(default=0, verbose_name='商品已定数量')

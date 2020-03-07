@@ -1,0 +1,29 @@
+{% extends 'base_orders.html' %}
+{% load static %}
+
+{% block ext_js %}
+    {{ block.super }}
+    <script src="{% static 'chuan/orders/js/order_detail.js' %}"></script>
+{% endblock %}
+{% block content %}
+    <div class="container" id="order_detail">
+        <p>订单编号：{{ order.id }}</p>
+        <p>收货地址</p>
+        <div>
+            <p>{{ address.a_name }} {{ address.a_phone }} {{ address.a_code }}</p>
+            <p>{{ address.a_address }}</p>
+        </div>
+        <ul>
+            {% for ordergoods in order.ordergoods_set.all %}
+                <li>
+                    <img src="{{ MEDIA_KEY_PREFIX }}{{ ordergoods.o_goods.g_img }}" height="90px">
+                    <p>{{ ordergoods.o_goods.g_title }}</p>
+                    <p>{{ order.o_price }}</p>
+                    <p>{{ ordergoods.o_goods_num }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+        <p id="total_price">总价：{{ order.o_price }}</p>
+        <button id="alipay" orderid="{{ order.id }}">支付</button>
+    </div>
+{% endblock %}

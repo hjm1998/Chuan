@@ -1,0 +1,158 @@
+.clear:after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
+.content {
+    width: 1200px;
+    margin: 10px auto;
+}
+
+.top-text {
+    line-height: 42px;
+    font-size: 18px;
+}
+
+.checkout-steps {
+    background-color: #fff;
+    padding: 0 20px;
+    border: 1px solid #f0f0f0;
+}
+
+.step-tit {
+    line-height: 40px;
+    height: 40px;
+    color: #333;
+    font-weight: bold;
+}
+
+.add-address {
+    float: right;
+    line-height: 40px;
+    height: 40px;
+    font-size: 14px;
+}
+
+.addr-detail {
+    padding-bottom: 16px;
+}
+
+.addr-detail ul li{
+    width: 50%;
+}
+
+
+.addr-detail span {
+    display: inline-block;
+    margin-left: 10px;
+    line-height: 36px;
+}
+
+.choose-pay, .goods-list, .pay-message {
+    border-top: 1px solid #e2e1e1;
+    padding-bottom: 20px;
+}
+
+.payment-item{
+    float: left;
+    border: 2px solid #cac4c4;
+    padding: 4px 20px;
+    margin: 2px 5px;
+}
+
+.merchant, .pay-msg {
+    font-size: 14px;
+    margin: 18px 5px 5px 5px;
+}
+
+.pay-goods-list {
+    margin: 5px;
+    padding: 10px 0 0 0;
+}
+
+.pay-goods-item img {
+    display: block;
+    width: 80px;
+    height: 80px;
+    border: 1px solid #d6d6d6;
+}
+
+.pay-goods-img {
+    float: left;
+}
+
+.pay-goods-title {
+    float: left;
+    padding: 0 0 0 20px;
+}
+
+.pay-goods-price, .pay-goods-num {
+    float: left;
+    padding: 0 0 0 40px;
+}
+
+.pay-count-num {
+    float: left;
+    text-align: right;
+    padding: 0 0 10px 0;
+}
+
+.pay-count-money {
+    float: left;
+    text-align: right;
+    padding: 10px 0;
+}
+
+.pay-count-addr {
+    text-align: right;
+    padding: 10px 0;
+}
+
+.pay-count-div {
+    float: right;
+    width: 370px;
+}
+
+
+.pay-count span {
+    width: 200px;
+    margin-right: 20px;
+    float: left;
+    text-align: right;
+}
+
+.pay-count em {
+    display: block;
+    float: right;
+    width: 150px;
+}
+
+.em-money {
+    color: #e4393c;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.pay-submit button {
+    float: right;
+    width: 135px;
+    height: 36px;
+    background-color: #e8393c;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 3px;
+    border: 0;
+    margin-bottom: 20px;
+}
+
+.selected {
+    font-weight: bold;
+    border: 2px solid #e8393c;
+}
+
+.pay-selected {
+    font-weight: bold;
+    border: 2px solid #e8393c;
+}

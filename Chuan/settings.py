@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'index',
     'users',
-    'merchant'
+    'merchant',
+    'orders'
 ]
 
 MIDDLEWARE = [
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'middleware.middleware.LoginMiddleware',
 ]
 
 ROOT_URLCONF = 'Chuan.urls'
@@ -145,7 +147,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-MEDIA_KEY_PREFIX = '/static/uploads'
+MEDIA_KEY_PREFIX = '/static/uploads/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/uploads')
 

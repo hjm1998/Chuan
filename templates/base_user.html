@@ -5,3 +5,34 @@
     {{ block.super }}
     <script type="text/javascript" src="{% static 'js/md5.js' %}"></script>
 {% endblock %}
+
+{% block content %}
+    <div class="middleBox">
+        <div class="middle">
+            <div class="menu">
+                <dl>
+                    <dt>订单中心</dt>
+                    <dd>
+                        <a href="{% url 'users:mine_order' %}" class="menuText">我的订单</a>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>我的关注</dt>
+                    <dd>关注商品</dd>
+                    <dd>关注店铺</dd>
+                </dl>
+                <dl>
+                    <dt>设置</dt>
+                    <dd>个人信息</dd>
+                    <dd><a href="{% url 'users:address' %}" class="menuText">收货地址</a></dd>
+                </dl>
+            </div>
+
+            <div class="main">
+                {% block main %}
+
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

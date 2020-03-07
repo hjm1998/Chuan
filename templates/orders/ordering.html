@@ -1,0 +1,216 @@
+{% extends 'base_orders.html' %}
+{% load static %}
+
+{% block ext_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'chuan/orders/css/ordering.css' %}">
+{% endblock %}
+
+{% block ext_js %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'chuan/orders/js/ordering.js' %}"></script>
+{% endblock %}
+
+{% block header %}
+    <div class="">
+        <div class="headerBox">
+            <div class="headerTop">
+                <div class="headerTopRight">
+                    {% if is_login %}
+                        <p>您好，<a href="{% url 'users:mine' %}" style="color: #0f0f0f">{{ username }}</a>&nbsp;&nbsp;
+                            <a href="{% url 'users:login' %}" class="textTop">退出登录</a>&nbsp;|&nbsp;
+                            <a href="{% url 'users:mine_order' %}" class="textTop">我的订单</a>
+                            {% else %}
+                        <p>您好，请&nbsp;<a href="{% url 'users:login' %}" class="mine-login">登录</a>&nbsp;&nbsp;
+                        <a href="{% url 'users:register' %}" class="textTop">注册</a>&nbsp;|&nbsp;
+                        <a href="{% url 'users:login' %}" class="textTop">我的订单</a>
+                    {% endif %}
+                    <img src="/static/img/icon/horn.png" alt="" id="horn">
+                    <a href="#" class="textTop">网站公告</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="logoArea">
+            <div class="logo" style="display: block">
+                <a href="{% url 'index:indexs' %}"> <img class="logo-img" src="/static/img/icon/indexlogo.jpg"
+                                                         alt=""></a>
+            </div>
+            <div class="logoText">
+                <a href="{% url 'users:mine' %}">{{ message }}</a>
+            </div>
+
+        </div>
+        <div class="clearfix"></div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="content">
+    <div>
+        <span class="top-text">请核对订单信息</span>
+    </div>
+    <div class="checkout-steps">
+    <div class="clear">
+        <h3 class="step-tit" style="float: left;">收货人信息</h3>
+        <div class="add-address">新增收货地址</div>
+    </div>
+    <div class="addr-detail clear">
+        <ul id="address">
+            {% for addr in address %}
+                {% if addr.a_is_default == 1 %}
+                    <li class="selected" addressid="{{ addr.id }}">
+                        {% else %}
+                    <li addressid="{{ addr.id }}">
+                {% endif %}
+            <span id="a-name">{{ addr.a_name }}</span>
+            <span id="a-address">{{ addr.a_address }}</span>
+            <span id="a-phone">{{ addr.a_phone }}</span>
+            {#                    {% if addr.a_is_default %}#}
+            {#                        <p>默认地址</p>#}
+            {#                    {% endif %}#}
+            </li>
+
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="choose-pay">
+        <div class="clear">
+            <h3 class="step-tit">支付方式</h3>
+            <ul>
+                <li class="payment-item pay-selected">支付宝支付</li>
+                <li class="payment-item">微信支付</li>
+                <li class="payment-item">银联支付</li>
+            </ul>
+        </div>
+    </div>
+    <div class="goods-list">
+        <h3 class="step-tit">送货清单</h3>
+
+        {% for key, value in carts.items %}
+
+            {% for cart in value %}
+                {% if forloop.counter == 1 %}
+                    <div>
+                    <div class="merchant">{{ cart.c_goods.g_project.p_merchant.m_merchantName }}</div>
+                {% endif %}
+
+                <div class="pay-goods-list">
+                    <div class="pay-goods-item clear">
+                        <div class="pay-goods-img">
+                            <img src="{{ MEDIA_KEY_PREFIX }}{{ cart.c_goods.g_img }}" alt="">
+                        </div>
+                        <div class="pay-goods-title">
+                            <a href="#" target="_blank">
+                                {{ cart.c_goods.g_project.p_title }}
+                            </a>
+                        </div>
+                        <div class="pay-goods-price">
+                            <div class="price">￥{{ cart.c_goods.g_price }}</div>
+                        </div>
+                        <div class="pay-goods-num">
+                            <span>x{{ cart.c_goods_num }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                {% if forloop.counter == 1 %}
+                    <div>
+                {% endif %}
+
+
+            {% endfor %}
+        {% endfor %}
+
+        </div>
+        <div class="pay-message">
+            <div class="clear">
+                <h3 class="step-tit">备注信息</h3>
+                <div class="pay-msg">
+                    <input type="text">
+                </div>
+
+            </div>
+        </div>
+        <div class="pay-count">
+            <div class="pay-count-div">
+                <div class="pay-count-num">
+                    <span>{{ all_num }}&nbsp;件商品，总商品金额：</span><em>￥{{ total_price }}</em>
+                </div>
+                <div class="pay-count-money">
+                    <span style="line-height: 22px">应付总额：</span><em class="em-money">￥{{ total_price }}</em>
+                </div>
+            </div>
+            <div style="clear: both"></div>
+            <div class="pay-count-addr">
+                寄送至：{{ address.first.a_address }}&nbsp;收货人：{{ address.first.a_name }}&nbsp;{{ address.first.a_phone }}</div>
+            <div class="pay-submit">
+                <button id="make_order">提交订单</button>
+            </div>
+
+        </div>
+        </div>
+    </div>
+{% endblock %}
+
+{#{% block content %}#}
+{#    <div>#}
+{##}
+{#        <div>#}
+{#            <p>我的地址</p>#}
+{#            <ul id="address">#}
+{#                {% for addr in address %}#}
+{#                    {% if addr.a_is_default == 1 %}#}
+{#                        <li class="selected" addressid="{{ addr.id }}">#}
+{#                            {% else %}#}
+{#                        <li addressid="{{ addr.id }}">#}
+{#                    {% endif %}#}
+{#                <p>{{ addr.a_name }}{{ addr.a_phone }}{{ addr.a_code }}</p>#}
+{#                <p>{{ addr.a_address }}</p>#}
+{#                {% if addr.a_is_default %}#}
+{#                    <p>默认地址</p>#}
+{#                {% endif %}#}
+{#                </li>#}
+{##}
+{#                {% endfor %}#}
+{#            </ul>#}
+{#        </div>#}
+{#        <div class="cart">#}
+{#            {% for cart in carts %}#}
+{#                <ul>#}
+{#                    <li>#}
+{#                        <div class="col-md-4">#}
+{#                            <a href="">#}
+{#                                <img src="{{ MEDIA_KEY_PREFIX }}{{ cart.c_goods.g_img }}" alt="" height="90px">#}
+{#                            </a>#}
+{#                        </div>#}
+{#                        <div class="col-md-4">#}
+{#                            <p>{{ cart.c_goods.g_title }}</p>#}
+{#                        </div>#}
+{#                        <div class="col-md-4">#}
+{#                            <p>{{ cart.c_goods.g_price }}</p>#}
+{#                        </div>#}
+{#                    </li>#}
+{#                </ul>#}
+{#            {% endfor %}#}
+{#        </div>#}
+{#        <div class="Bill">#}
+{#            <div class="row">#}
+{#                <div class="col-md-1 all_select">#}
+{#                </div>#}
+{#                <div class="col-md-2">#}
+{#                    <span>共计：</span>#}
+{#                </div>#}
+{#                <div class="col-md-2">#}
+{#                    <span id="total_price">{{ total_price }}</span>#}
+{#                </div>#}
+{#                <div class="col-md-1">#}
+{#                    <button id="make_order">提交订单</button>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#{% endblock %}#}

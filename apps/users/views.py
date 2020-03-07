@@ -9,7 +9,12 @@ from django.shortcuts import render, redirect
 from django.template import loader
 from django.urls import reverse
 
-from users.models import Users
+from Chuan.settings import MEDIA_KEY_PREFIX
+from merchant.models import Goods
+from orders.models import Cart, Order
+from orders.views_constant import ORDER_STATUS_NOT_PAY, ORDER_STATUS_NOT_SEND, ORDER_STATUS_NOT_RECEIVE
+from orders.views_helper import get_cart_num
+from users.models import Users, Address
 from users.views_constant import HTTP_USER_EXIST, HTTP_OK, HTTP_EMAIL_EXIST
 from users.views_helper import hash_str, send_email_activate
 
@@ -67,12 +72,12 @@ def login(request):
                     request.session['user_id'] = user.id
                     return redirect(reverse('users:mine'))
                 else:
-                    request.session['error_message'] = 'not activate'
+                    request.session['error_message'] = '用户未激活'
                     redirect(reverse('users:login'))
             else:
-                request.session['error_message'] = 'password error'
+                request.session['error_message'] = '密码错误'
                 return redirect(reverse('users:login'))
-        request.session['error_message'] = 'user does not exist'
+        request.session['error_message'] = '用户不存在'
         return redirect(reverse('users:login'))
 
 
@@ -105,15 +110,19 @@ def check_email(request):
 
 
 def mine(request):
-    user_id = request.session.get('user_id')
+    user_id = request.user.id
     data = {
-        'title': '我的',
-        'is_login': False
+        'title': '我的众筹',
+        'is_login': False,
+        'cart_num': get_cart_num(user_id)
     }
     if user_id:
         user = Users.objects.get(pk=user_id)
         data['username'] = user.u_username
         data['is_login'] = True
+        data['order_not_pay'] = Order.objects.filter(o_user=user).filter(o_status=ORDER_STATUS_NOT_PAY).count()
+        data['order_not_receive'] = Order.objects.filter(o_user=user).filter(
+            o_status__in=[ORDER_STATUS_NOT_RECEIVE, ORDER_STATUS_NOT_SEND]).count()
 
     return render(request, 'user/mine.html', context=data)
 
@@ -134,3 +143,65 @@ def activate(request):
         user.save()
         return redirect(reverse('users:login'))
     return render(request, 'user/activate_fail.html')
+
+
+def address(request):
+    user_id = request.user.id
+    if request.method == 'GET':
+        data = {
+            'title': '我的',
+            'is_login': True
+        }
+        user = Users.objects.get(pk=user_id)
+        data['username'] = user.u_username
+        user_address = Address.objects.filter(a_user_id=user_id).order_by('-a_is_default')
+        data['address'] = user_address
+        data['cart_num'] = get_cart_num(user_id)
+        return render(request, 'user/address.html', context=data)
+    elif request.method == "POST":
+        name = request.POST.get('name')
+        phone = request.POST.get('phone')
+        address_detail = request.POST.get('address')
+        code = request.POST.get("code")
+        if request.POST.get('default'):
+            default = True
+            address_sure = Address.objects.filter(a_user_id=user_id).get(a_is_default=True)
+            address_sure.a_is_default = False
+            address_sure.save()
+        else:
+            default = False
+            try:
+                address_sure = Address.objects.filter(a_user_id=user_id).get(a_is_default=True)
+            except Address.DoesNotExist:
+                default = True
+        address_obj = Address()
+        address_obj.a_name = name
+        address_obj.a_phone = phone
+        address_obj.a_address = address_detail
+        address_obj.a_code = code
+        address_obj.a_is_default = default
+        address_obj.a_user_id = user_id
+        address_obj.save()
+        return redirect(reverse('users:address'))
+
+
+def mine_order(request):
+    user_id = request.user.id
+    user = Users.objects.get(pk=user_id)
+    orders = Order.objects.filter(o_user_id=user_id).order_by('-o_time')
+
+
+    # data['username'] = user.u_username
+    # data['is_login'] = True
+    # data['order_not_pay'] = Order.objects.filter(o_user=user).filter(o_status=ORDER_STATUS_NOT_PAY).count()
+    # data['order_not_receive'] = Order.objects.filter(o_user=user).filter(
+    # o_status__in=[ORDER_STATUS_NOT_RECEIVE, ORDER_STATUS_NOT_SEND]).count()
+    data = {
+        'title': '我的订单',
+        'is_login': True,
+        'username': user.u_username,
+        'orders': orders,
+        'MEDIA_KEY_PREFIX': MEDIA_KEY_PREFIX,
+        'cart_num': get_cart_num(user_id)
+    }
+    return render(request, 'user/mine_order.html', context=data)

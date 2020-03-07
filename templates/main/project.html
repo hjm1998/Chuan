@@ -1,0 +1,41 @@
+{% extends 'base_project.html' %}
+{% load static %}
+
+{% block ext_js %}
+    {{ super.block }}
+    <script type="text/javascript" src="{% static 'chuan/main/js/project.js' %}"></script>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-8">
+            <img src="{{ MEDIA_KEY_PREFIX }}{{ projects.p_introImg }}" alt="">
+        </div>
+        <div class="col-md-4">
+            <h1>{{ projects.p_title }}</h1>
+            <h1>{{ projects.p_introText }}</h1>
+            <p>{{ projects.p_classify }}</p>
+            <p>{{ projects.p_days }}</p>
+            <p>{{ projects.p_follow }}</p>
+            <p>{{ projects.p_target }}</p>
+            <p>{{ projects.p_already }}</p>
+            <p>{{ projects.p_status }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <img src="{{ MEDIA_KEY_PREFIX }}{{ projects.p_detail }}" alt="">
+        </div>
+        <div class="col-md-4">
+            {% for goods in goods_list %}
+                <img src="{{ MEDIA_KEY_PREFIX }}{{ goods.g_img }}" alt="" height="90px">
+                <p>{{ goods.g_title }}</p>
+                <p>{{ goods.g_detail }}</p>
+                <p>{{ goods.g_price }}</p>
+                <p>{{ goods.g_sold }}</p>
+                <p>{{ goods.g_stock }}</p>
+                <p>{{ goods.g_postage }}</p>
+                <button goodsid="{{ goods.id }}" class="subShopping">放入心愿单</button>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

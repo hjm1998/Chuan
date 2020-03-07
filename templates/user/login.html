@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block ext_css %}
-    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'chuan/user/css/login.css' %}">
 {% endblock %}
 
 {% block ext_js %}
@@ -10,24 +10,78 @@
     <script type="text/javascript" src="{% static 'chuan/user/js/login.js' %}"></script>
 {% endblock %}
 
+{% block header %}
+
+{% endblock %}
+
 {% block content %}
     <div class="container">
-        <form method="post" action="{% url 'users:login' %}" onsubmit="return parse_data()">
-
-            {% csrf_token %}
-
-            <p>{{ error_message }}</p>
-
-            <div class="form-group">
-                <label for="username_input">用户名</label>
-                <input name="username" type="text" class="form-control" id="username_input" placeholder="用户名/邮箱">
+        <div class="text-right merchant">
+            <a href="{% url 'merchant:login' %}">
+                <button class="btn btn-info">去商家版</button>
+            </a>
+        </div>
+        <div class="all-center">
+            <div class="user-logo">
+                <img class="center-block logo-img" src="/static/img/icon/header.png" alt="">
             </div>
-            <div class="form-group">
-                <label for="password_input">密码</label>
-                <input name="password" type="password" class="form-control" id="password_input" placeholder="请输入密码">
-            </div>
+            <form method="post" action="{% url 'users:login' %}" onsubmit="return parse_data()">
 
-            <button type="submit" class="btn btn-success btn-block">登录</button>
-        </form>
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2 col-md-push-3 text-tip">
+                            <label for="username_input">用户名</label>
+                        </div>
+                        <div class="col-md-6 col-md-push-2">
+                            <input name="username" type="text" class="form-control" id="username_input"
+                                   placeholder="用户名/手机号/邮箱">
+                        </div>
+                        <div class="col-md-4 col-md-push-2">
+                            <span id="username_info" class="text-tip error_message">
+                                {% if error_message == '用户不存在' or error_message == '用户未激活' %}
+                                    {{ error_message }}
+                                {% endif %}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="row">
+                        <div class="col-md-2 col-md-push-3 text-tip">
+                            <label for="password_input">密码</label>
+                        </div>
+                        <div class="col-md-6 col-md-push-2">
+                            <input name="password" type="password" class="form-control" id="password_input"
+                                   placeholder="请输入密码">
+                        </div>
+                        <div class="col-md-4 col-md-push-2">
+                            <span id="password_info" class="text-tip error_message">
+                                {% if error_message == '密码错误' %}
+                                    {{ error_message }}
+                                {% endif %}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="row">
+                        <div class="col-md-7 col-md-push-3 loginbtn">
+                            <button type="submit" class="btn btn-success btn-lg btn-block">登录</button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-7 col-md-push-4 registerbtn">
+                            <h2>未拥有账号><a href="{% url 'users:register' %}">去注册</a></h2>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
     </div>
 {% endblock %}

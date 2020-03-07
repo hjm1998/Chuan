@@ -31,10 +31,24 @@
         -p_classify     项目分类
         -p_introImg     简介图片
         -p_detail       详细图片
+        -p_days         众筹期限
         -p_follow       关注数
         -p_target       目标金额
         -p_already      已筹金额
-       
+        -p_status       项目状态
+      
+## Goods
+-商品表
+        -g_title        商品名称
+        -g_detail       商品详细
+        -g_price        商品价格
+        -g_sold         商品已定数量
+        -g_stock        商品库存
+        -g_postage      配送费
+        -g_project      商品项目
+        
+## Cart
+        
        
 -密码要求
     -不能包括空格
@@ -44,5 +58,8 @@
     
     
     
+    
+
 -版本迭代
     -注册密码要求
+    -商家验证信息

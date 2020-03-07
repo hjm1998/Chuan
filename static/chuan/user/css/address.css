@@ -1,0 +1,225 @@
+.addressList {
+    background-color: #fff;
+    margin-bottom: 20px;
+    padding: 10px 20px 20px;
+}
+
+.add-btn:visited, .add-btn:hover, .add-btn:active, .add-btn:link {
+    color: #333;
+    text-decoration: none;
+}
+
+a.add-btn {
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: 700;
+    padding: 0 14px;
+    height: 28px;
+    line-height: 28px;
+    font-size: 14px;
+    margin: 0 10px 0 0;
+    background-color: #ebf1e6;
+    border: 1px solid #cec9c9;
+}
+
+.mt {
+    height: 45px;
+    padding: 10px 0;
+}
+
+.mc {
+    line-height: 20px;
+}
+
+.sm {
+    border: 2px solid #e6e6e6;
+    margin: 0 0 10px;
+}
+
+.smt {
+    padding-left: 10px;
+    line-height: 35px;
+    height: 35px;
+    position: relative;
+    overflow: visible;
+}
+
+h3 span {
+    margin: 0 0 0 10px;
+    font-size: 12px;
+    background-image: initial;
+    background-position-x: initial;
+    background-position-y: initial;
+    background-size: initial;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: rgb(255, 170, 69);
+    padding: 2px;
+    color: #fff;
+    font-weight: 400;
+}
+
+.smc {
+    padding: 10px;
+    line-height: 22px;
+    width: 788px;
+}
+
+.item {
+    width: 300px;
+    text-align: right;
+}
+
+.item span {
+    float: left;
+    width: 80px;
+    color: #999;
+    text-align: right;
+}
+
+.fl {
+    width: 360px;
+    text-align: left;
+}
+
+.clr {
+    display: block;
+    overflow: hidden;
+    clear: both;
+    height: 0;
+    line-height: 0;
+    font-size: 0;
+}
+
+
+/*模拟框*/
+.thickdiv {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10000001;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    border: 0;
+    filter: alpha(opacity=15);
+    opacity: .15;
+}
+
+
+.thickwrap {
+    position: fixed;
+    top: 10%;
+    left: 25%;
+    z-index: 10000002;
+    width: 762px;
+    height: 500px;
+    padding: 0;
+    background: white;
+    border: 4px solid rgba(0, 0, 0, .1);
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.thicktitle {
+    height: 27px;
+    padding: 0 10px;
+    border: solid #C4C4C4;
+    border-width: 1px 1px 0;
+    background: #F3F3F3;
+    line-height: 27px;
+    font-family: arial, "\5b8b\4f53";
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
+}
+
+.thickcon {
+    overflow: auto;
+    height: 465px;
+    background: #fff;
+    border: solid #C4C4C4;
+    border-width: 1px;
+    padding: 20px 30px;
+}
+
+em {
+    color: #e4393c;
+}
+
+.label {
+    float: none;
+    display: block;
+    vertical-align: middle;
+    color: #999;
+    text-align: left;
+    height: 30px;
+    line-height: 18px;
+    padding: 6px 0;
+    width: 100px;
+}
+
+.item-addr {
+    margin: 0 0 5px;
+    line-height: 22px;
+}
+
+.fl-addr {
+    float: left;
+}
+
+.text {
+    height: 30px;
+    line-height: 18px;
+    padding: 6px;
+    width: 220px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.extra {
+    float: left;
+}
+
+.btns {
+    margin: 25px 0 0;
+}
+
+.btns a {
+    color: #333;
+    text-decoration: none;
+    line-height: 15px;
+    padding: 4px 14px;
+    font-size: 15px;
+    background: #F7F7F7;
+    border: 1px solid #C4C4C4;
+}
+
+.thickclose:link, .thickclose:visited {
+    display: block;
+    position: absolute;
+    z-index: 100000;
+    top: 7px;
+    right: 12px;
+    overflow: hidden;
+    width: 15px;
+    height: 15px;
+    background: url(//misc.360buyimg.com/201007/skin/df/i/bg_thickbox.gif) no-repeat 0 -18px;
+    font-size: 0;
+    line-height: 100px;
+}
+
+.aText {
+    font-size: 14px;
+}
+
+a.aText {
+    color: #005ea7;
+}
+
+.aText:hover, .aText:active, .aText:link {
+    color: #e4393c;
+    text-decoration: none;
+}

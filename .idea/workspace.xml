@@ -44,9 +44,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
-        <option value="CSS File" />
-        <option value="HTML File" />
         <option value="JavaScript File" />
+        <option value="HTML File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -61,23 +61,24 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Three" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/static/img/icon" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\my_django\Chuan\static\img\icon" />
+      <recent name="D:\my_django\Chuan\static\chuan\merchant\css" />
       <recent name="D:\my_django\Chuan\templates\user" />
       <recent name="D:\my_django\Chuan\static\chuan\user\css" />
       <recent name="D:\my_django\Chuan\static\img" />
-      <recent name="D:\my_django\Chuan\static\css" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\my_django\Chuan\apps\users" />
-      <recent name="D:\my_django\Chuan\apps" />
-      <recent name="D:\my_django\Chuan" />
-      <recent name="D:\my_django\Chuan\App" />
+      <recent name="D:\my_django\Chuan\templates\user" />
       <recent name="D:\my_django\Chuan\templates" />
+      <recent name="D:\my_django\Chuan\static\chuan\orders\js" />
+      <recent name="D:\my_django\Chuan\templates\orders" />
+      <recent name="D:\my_django\Chuan\apps\users" />
     </key>
   </component>
   <component name="RunManager">
@@ -118,22 +119,7 @@
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="root:Chuan@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@15e37eb6" type="9fbbdea:ServiceModel$ServiceNode" />
-              </path>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="root:Chuan@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@6a9fdc49" type="9fbbdea:ServiceModel$ServiceNode" />
-              </path>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="root:Chuan@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@35dcfd24" type="9fbbdea:ServiceModel$ServiceNode" />
-              </path>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="root:Chuan@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@437e6c51" type="9fbbdea:ServiceModel$ServiceNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@3de85491" type="9fbbdea:ServiceModel$ServiceNode" />
               </path>
             </expand>
             <select />
@@ -165,7 +151,21 @@
       <workItem from="1581326902049" duration="3999000" />
       <workItem from="1581579941898" duration="4524000" />
       <workItem from="1581829502310" duration="18000" />
-      <workItem from="1581849842602" duration="6164000" />
+      <workItem from="1581849842602" duration="27893000" />
+      <workItem from="1582113868724" duration="14824000" />
+      <workItem from="1582202717731" duration="1205000" />
+      <workItem from="1582337879893" duration="8405000" />
+      <workItem from="1582456102211" duration="16806000" />
+      <workItem from="1582533497506" duration="8155000" />
+      <workItem from="1582595018147" duration="13793000" />
+      <workItem from="1582772528026" duration="27512000" />
+      <workItem from="1582893319715" duration="17048000" />
+      <workItem from="1582940714324" duration="30024000" />
+      <workItem from="1583320514867" duration="8017000" />
+      <workItem from="1583379350377" duration="10321000" />
+      <workItem from="1583498855658" duration="1164000" />
+      <workItem from="1583508170496" duration="9350000" />
+      <workItem from="1583591319467" duration="7325000" />
     </task>
     <servers />
   </component>
@@ -181,37 +181,37 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="520" y="215" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1580796591494" />
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1580642865378">
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1582792116803">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1580642865378" />
-    <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1581853901184">
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1582792116803" />
+    <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1581920323206">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1581853901184" />
-    <state width="1024" height="210" key="GridCell.Tab.0.bottom" timestamp="1581327270038">
+    <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1581920323206" />
+    <state width="1024" height="210" key="GridCell.Tab.0.bottom" timestamp="1583504085610">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1024" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1581327270038" />
-    <state width="1024" height="210" key="GridCell.Tab.0.center" timestamp="1581327270038">
+    <state width="1024" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1583504085610" />
+    <state width="1024" height="210" key="GridCell.Tab.0.center" timestamp="1583504085609">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1024" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1581327270038" />
-    <state width="1024" height="210" key="GridCell.Tab.0.left" timestamp="1581327270038">
+    <state width="1024" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1583504085609" />
+    <state width="1024" height="210" key="GridCell.Tab.0.left" timestamp="1583504085608">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1024" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1581327270038" />
-    <state width="1024" height="210" key="GridCell.Tab.0.right" timestamp="1581327270038">
+    <state width="1024" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1583504085608" />
+    <state width="1024" height="210" key="GridCell.Tab.0.right" timestamp="1583504085609">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1024" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1581327270038" />
-    <state x="638" y="302" width="340" height="235" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1581854302514">
+    <state width="1024" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1583504085609" />
+    <state x="638" y="302" width="340" height="235" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1582458876945">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="638" y="302" width="340" height="235" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1536.824@0.0.1536.824" timestamp="1581854302514" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1581153536482">
+    <state x="638" y="302" width="340" height="235" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1536.824@0.0.1536.824" timestamp="1582458876945" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1583510971313">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1581153536482" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1583510971313" />
   </component>
 </project>

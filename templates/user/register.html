@@ -2,7 +2,6 @@
 {% load static %}
 
 {% block ext_css %}
-    {{ block.super }}
     <link rel="stylesheet" href="{% static 'chuan/user/css/register.css' %}">
 {% endblock %}
 
@@ -12,38 +11,103 @@
 {% endblock %}
 
 {% block header %}
-    <header></header>
+
 {% endblock %}
 
 {% block content %}
     <div class="container">
-        <form method="post" action="{% url 'users:register' %}" onsubmit="return check()">
+        <div class="text-right merchant">
+            <a href="{% url 'merchant:register' %}">
+                <button class="btn btn-info">去商家版</button>
+            </a>
+        </div>
 
-            {% csrf_token %}
+        <div class="all-center">
+            <div class="user-logo">
+                <img class="center-block logo-img" src="/static/img/icon/header.png" alt="">
+            </div>
+            <form method="post" action="{% url 'users:register' %}" onsubmit="return check()">
 
-            <div class="form-group">
-                <label for="username_input">用户名</label>
-                <input name="username" type="text" class="form-control" id="username_input" placeholder="请输入用户名">
-                <span id="username_info"></span>
-            </div>
-            <div class="form-group">
-                <label for="email_input">邮箱</label>
-                <input name="email" type="text" class="form-control" id="email_input" placeholder="请输入邮箱">
-                <span id="email_info"></span>
-            </div>
-            <div class="form-group">
-                <label for="password_input">密码</label>
-                <input name="password" type="password" class="form-control" id="password_input" placeholder="请输入密码">
-                <span id="password_info"></span>
-            </div>
-            <div class="form-group">
-                <label for="password_confirm_input">确认密码</label>
-                <input name="password_confirm" type="password" class="form-control" id="password_confirm_input"
-                       placeholder="请再次输入密码">
-                <span id="password_confirm_info"></span>
-            </div>
+                {% csrf_token %}
 
-            <button type="submit" class="btn btn-success btn-block" id="button">注册</button>
-        </form>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2 col-md-push-3 text-tip">
+                            <label for="username_input">用户名</label>
+                        </div>
+                        <div class="col-md-6 col-md-push-2">
+                            <input name="username" type="text" class="form-control" id="username_input"
+                                   placeholder="请输入用户名" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="col-md-4 col-md-push-2">
+                            <span id="username_info" class="text-tip"></span>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="row">
+                        <div class="col-md-2 col-md-push-3 text-tip">
+                            <label for="email_input">邮箱</label>
+                        </div>
+                        <div class="col-md-6 col-md-push-2">
+                            <input name="email" type="text" class="form-control" id="email_input"
+                                   placeholder="请输入邮箱">
+                        </div>
+                        <div class="col-md-4 col-md-push-2">
+                            <span id="email_info" class="text-tip"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="clearfix"></div>
+
+
+                    <div class="row">
+                        <div class="col-md-2 col-md-push-3 text-tip">
+                            <label for="password_input">密码</label>
+                        </div>
+                        <div class="col-md-6 col-md-push-2">
+                            <input name="password" type="password" class="form-control" id="password_input"
+                                   placeholder="请输入密码">
+                        </div>
+                        <div class="col-md-4 col-md-push-2">
+                            <span id="password_info" class="text-tip"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="clearfix"></div>
+
+
+                    <div class="row">
+                        <div class="col-md-2 col-md-push-3 text-tip">
+                            <label for="password_confirm_input" style="font-size: 13.5px;">确认密码</label>
+                        </div>
+                        <div class="col-md-6 col-md-push-2">
+                            <input name="password_confirm" type="password" class="form-control"
+                                   id="password_confirm_input"
+                                   placeholder="请再次输入密码">
+                        </div>
+                        <div class="col-md-4 col-md-push-2">
+                            <span id="password_confirm_info" class="text-tip"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-7 col-md-push-3 registerbtn">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block" id="button">注册</button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-7 col-md-push-5 registerbtn">
+                            <h2>已有账号><a href="{% url 'users:login' %}">去登录</a></h2>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
     </div>
 {% endblock %}

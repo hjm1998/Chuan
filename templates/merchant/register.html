@@ -3,80 +3,181 @@
 
 {% block ext_css %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static 'chuan/merchant/css/register.css' %}">
+    <link rel="stylesheet" href="{% static 'chuan/merchant/css/reg.css' %}">
 {% endblock %}
 
 {% block ext_js %}
     {{ block.super }}
-    <script type="text/javascript" src="{% static 'chuan/merchant/js/register.js' %}"></script>
+    <script type="text/javascript" src="{% static 'chuan/merchant/js/reg.js' %}"></script>
 {% endblock %}
 
 {% block header %}
-    <header></header>
+
 {% endblock %}
 
 {% block content %}
     <div class="container">
-        <form method="post" action="{% url 'merchant:register' %}" onsubmit="return check()"
-              enctype="multipart/form-data" style="width: 50%">
+        <div class="text-right merchant">
+            <a href="{% url 'users:register' %}">
+                <button class="btn btn-info">去用户版</button>
+            </a>
+        </div>
 
-            {% csrf_token %}
-
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-6">
-                        {#                    <label for="merchantName_input">商家名</label>#}
-                        <input name="merchantName" type="text" class="form-control" id="merchantName_input"
-                               placeholder="请输入商家名">
-
-                    </div>
-                    <div class="col-md-6">
-                        <span id="merchantName_info"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="phone_input">手机号码</label>
-                    <input name="phone" type="text" class="form-control" id="phone_input" placeholder="请输入手机号码">
-                    <span id="phone_info"></span>
-                </div>
-                <div class="form-group">
-                    <label for="email_input">邮箱</label>
-                    <input name="email" type="text" class="form-control" id="email_input" placeholder="请输入邮箱">
-                    <span id="email_info"></span>
-                </div>
-                <div class="form-group">
-                    <label for="password_input">密码</label>
-                    <input name="password" type="password" class="form-control" id="password_input" placeholder="请输入密码">
-                    <span id="password_info"></span>
-                </div>
-                <div class="form-group">
-                    <label for="password_confirm_input">确认密码</label>
-                    <input name="password_confirm" type="password" class="form-control" id="password_confirm_input"
-                           placeholder="请再次输入密码">
-                    <span id="password_confirm_info"></span>
-                </div>
-                <div class="form-group">
-                    <label for="idCard">身份证号码</label>
-                    <input name="idCard" type="text" class="form-control" id="idCard_input" placeholder="请输入身份证">
-                    <span id="idCard_info"></span>
-                </div>
-                <div class="form-group">
-                    <label for="idCard_front">身份证正面照</label>
-                    <input name="idCard_front" type="file" id="idCard_front_input">
-                    <span id="idCard_front_info"></span>
-                </div>
-                <div class="form-group">
-                    <label for="idCard_back">身份证背面照</label>
-                    <input name="idCard_back" type="file" id="idCard_back_input">
-                    <span id="idCard_back_info"></span>
-                </div>
-                <div class="form-group">
-                    <label for="icon">商家头像</label>
-                    <input name="icon" type="file" id="icon_input">
-                    <span id="icon_info"></span>
-                </div>
-                <button type="submit" class="btn btn-success btn-block" id="button">注册</button>
+        <div class="all-center">
+            <div class="reg-logo">
+                <img class="center-block logo-img" src="/static/img/icon/header.png" alt="">
             </div>
-        </form>
+            <form method="post" action="{% url 'merchant:register' %}" onsubmit="return check()"
+                  enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2 col-md-push-2 text-tip">
+                            <label for="merchantName_input">商家名</label>
+                        </div>
+                        <div class="col-md-6 col-md-push-2">
+                            <input name="merchantName" type="text" class="form-control" id="merchantName_input"
+                                   placeholder="请输入商家名">
+                        </div>
+                        <div class="col-md-4 col-md-push-2">
+                            <span id="merchantName_info" class="text-tip"></span>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="row">
+                        <div class="col-md-2 col-md-push-2 text-tip">
+                            <label for="phone_input">手机号码</label>
+                        </div>
+                        <div class="col-md-6 col-md-push-2">
+                            <input name="phone" type="text" class="form-control" id="phone_input" placeholder="请输入手机号码">
+                        </div>
+                        <div class="col-md-4 col-md-push-2">
+                            <span id="phone_info" class="text-tip"></span>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="row">
+                        <div class="col-md-2 col-md-push-2 text-tip">
+                            <label for="email_input">邮箱</label>
+                        </div>
+                        <div class="col-md-6 col-md-push-2">
+                            <input name="email" type="text" class="form-control" id="email_input" placeholder="请输入邮箱">
+                        </div>
+                        <div class="col-md-4 col-md-push-2">
+                            <span id="email_info" class="text-tip"></span>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="row">
+                        <div class="col-md-2 col-md-push-2 text-tip">
+                            <label for="password_input">密码</label>
+                        </div>
+                        <div class="col-md-6 col-md-push-2">
+                            <input name="password" type="password" class="form-control" id="password_input"
+                                   placeholder="请输入密码">
+                        </div>
+                        <div class="col-md-4 col-md-push-2">
+                            <span id="password_info" class="text-tip"></span>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="row">
+                        <div class="col-md-2 col-md-push-2 text-tip">
+                            <label for="password_confirm_input">确认密码</label>
+                        </div>
+                        <div class="col-md-6 col-md-push-2">
+                            <input name="password_confirm" type="password" class="form-control"
+                                   id="password_confirm_input"
+                                   placeholder="请再次输入密码">
+                        </div>
+                        <div class="col-md-4 col-md-push-2">
+                            <span id="password_confirm_info" class="text-tip"></span>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="row">
+                        <div class="col-md-2 col-md-push-2 text-tip">
+                            <label for="idCard">身份证号码</label>
+                        </div>
+                        <div class="col-md-6 col-md-push-2">
+                            <input name="idCard" type="text" class="form-control" id="idCard_input"
+                                   placeholder="请输入身份证">
+                        </div>
+                        <div class="col-md-4 col-md-push-2">
+                            <span id="idCard_info" class="text-tip"></span>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="row">
+                        <div class="col-md-2 col-md-push-2 text-tip id-text">
+                            <label for="idCard_front">身份证正面照</label>
+                        </div>
+                        <div class="col-md-6 col-md-push-2">
+                            <input name="idCard_front" type="file" id="idCard_front_input">
+                        </div>
+                        <div class="col-md-4 col-md-push-2">
+                            <span id="idCard_front_info"></span>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="row">
+                        <div class="col-md-2 col-md-push-2 text-tip id-text">
+                            <label for="idCard_back">身份证背面照</label>
+                        </div>
+                        <div class="col-md-6 col-md-push-2">
+                            <input name="idCard_back" type="file" id="idCard_back_input">
+                        </div>
+                        <div class="col-md-4 col-md-push-2">
+                            <span id="idCard_back_info"></span>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="row">
+                        <div class="col-md-2 col-md-push-2 text-tip">
+                            <label for="icon">商家头像</label>
+                        </div>
+                        <div class="col-md-6 col-md-push-2">
+                            <input name="icon" type="file" id="icon_input">
+                        </div>
+                        <div class="col-md-4 col-md-push-2">
+                            <span id="icon_info"></span>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="row">
+                        <div class="col-md-7 col-md-push-3 registerbtn">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block" id="button">注册</button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-7 col-md-push-5 registerbtn">
+                            <h2>已有账号><a href="{% url 'merchant:login' %}">去登录</a></h2>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
     </div>
 {% endblock %}

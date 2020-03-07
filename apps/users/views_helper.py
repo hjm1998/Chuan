@@ -4,6 +4,7 @@ from django.core.mail import send_mail
 from django.template import loader
 
 from Chuan.settings import EMAIL_HOST_USER, SERVER_HOST, SERVER_PORT, DEFAULT_FROM_EMAIL
+from orders.models import Cart
 
 
 def hash_str(source):

@@ -9,13 +9,57 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/swiper.css' %}">
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'chuan/main/css/header.css' %}">
     {% block ext_css %}
 
     {% endblock %}
 </head>
 <body>
-{% block header %}
 
+{% block header %}
+    <div class="">
+        <div class="headerBox">
+            <div class="headerTop">
+                <div class="headerTopRight">
+                    {% if is_login %}
+                        <p>您好，<a href="{% url 'users:mine' %}" style="color: #0f0f0f">{{ username }}</a>&nbsp;&nbsp;
+                            <a href="{% url 'users:login' %}" class="textTop">退出登录</a>&nbsp;|&nbsp;
+                            <a href="{% url 'users:mine_order' %}" class="textTop">我的订单</a>
+                            {% else %}
+                        <p>您好，请&nbsp;<a href="{% url 'users:login' %}" class="mine-login">登录</a>&nbsp;&nbsp;
+                        <a href="{% url 'users:register' %}" class="textTop">注册</a>&nbsp;|&nbsp;
+                        <a href="{% url 'users:login' %}" class="textTop">我的订单</a>
+                    {% endif %}
+                    <img src="/static/img/icon/horn.png" alt="" id="horn">
+                    <a href="#" class="textTop">网站公告</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="logoArea">
+            <div class="logo" style="display: block">
+                <a href="{% url 'index:indexs' %}"> <img class="logo-img" src="/static/img/icon/indexlogo.jpg"
+                                                         alt=""></a>
+            </div>
+            <div class="logoText">
+                <a href="{% url 'users:mine' %}">{{ message }}</a>
+            </div>
+
+            <div class="search">
+                <div class="searchTab">
+                    <input type="text" placeholder="请输入..." name="" id="" value=""/>
+                    <button><i>搜索</i></button>
+                </div>
+                <div class="cart">
+                    <img class="cart-img" src="/static/img/icon/cart.png" alt="">
+                    <p class="cart-text"><a href="{% url 'orders:cart' %}" id="cart-aText">购物车(<span>{{ cart_num }}</span>)</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
 {% endblock %}
 
 {% block content %}

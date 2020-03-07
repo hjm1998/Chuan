@@ -4,6 +4,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
+from Chuan.settings import MEDIA_KEY_PREFIX
 from merchant.models import Merchant, Project, Goods
 from merchant.views_contant import HTTP_ID_CART_EXIST, HTTP_MERCHANT_EXIST, HTTP_PHONE_EXIST, HTTP_EMAIL_EXIST
 
@@ -40,7 +41,7 @@ def register(request):
         merchant.m_idCard_back = idCard_back
         merchant.m_icon = icon
         merchant.save()
-        return HttpResponse('注册成功')
+        return render(request, 'merchant/login.html')
 
 
 def check_merchant_name(request):
@@ -57,13 +58,15 @@ def check_merchant_name(request):
 
 
 def check_id_card(request):
-    idCart = request.GET.get('idCart')
+    idCart = request.GET.get('idCard')
+    print(idCart)
     merchant = Merchant.objects.filter(m_idCard=idCart)
     data = {
         'status': 200,
         'msg': '身份证可用'
     }
     if merchant.exists():
+        print('ccc')
         data['status'] = HTTP_ID_CART_EXIST
         data['msg'] = '身份证已存在'
     return JsonResponse(data=data)
@@ -84,7 +87,7 @@ def check_phone(request):
 
 def check_email(request):
     email = request.GET.get('email')
-    merchant = Merchant.objects.filter(m_phone=email)
+    merchant = Merchant.objects.filter(m_email=email)
     data = {
         'status': 200,
         'msg': '邮箱号可用'
@@ -117,13 +120,13 @@ def login(request):
                     request.session['merchant_id'] = merchant.id
                     return redirect(reverse('merchant:mine'))
                 else:
-                    request.session['error_message'] = 'not activate'
+                    request.session['error_message'] = '用户未激活'
                     return redirect(reverse('merchant:login'))
             else:
-                request.session['error_message'] = 'password error'
+                request.session['error_message'] = '密码错误'
                 return redirect(reverse('merchant:login'))
         else:
-            request.session['error_message'] = 'user does not exist'
+            request.session['error_message'] = '用户不存在'
             return redirect(reverse('merchant:login'))
 
 
@@ -165,8 +168,8 @@ def publish(request):
         g_price = request.POST.get('g_price')
         g_stock = request.POST.get('g_stock')
         g_postage = request.POST.get('g_postage')
-        print(p_title, p_classify, p_introImg, p_introText, p_days, p_detail, p_target, g_title, g_detail, g_price,
-              g_stock, g_postage)
+        g_img = request.FILES.get('g_img')
+
         project = Project()
         project.p_title = p_title
         project.p_introText = p_introText
@@ -175,6 +178,7 @@ def publish(request):
         project.p_detail = p_detail
         project.p_days = p_days
         project.p_target = p_target
+        project.p_merchant = request.merchant
         project.save()
         goods = Goods()
         goods.g_project_id = project.id
@@ -183,5 +187,6 @@ def publish(request):
         goods.g_price = g_price
         goods.g_stock = g_stock
         goods.g_postage = g_postage
+        goods.g_img = g_img
         goods.save()
         return HttpResponse('hehe')

@@ -1,0 +1,30 @@
+{% extends 'base_orders.html' %}
+{% load static %}
+
+{% block ext_js %}
+    {{ block.super }}
+    <script src="{% static 'chuan/orders/js/order_list_not_pay.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="order_list_not_pay">
+        <ol>
+            {% for order in orders %}
+                <li>
+                    <ul class="order" orderid="{{ order.id }}">
+                        <p>订单编号：{{ order.id }}</p>
+                        {% for ordergoods in order.ordergoods_set.all %}
+                            <li>
+                                <img src="{{ MEDIA_KEY_PREFIX }}{{ ordergoods.o_goods.g_img }}" height="90px">
+                                <p>{{ ordergoods.g_title }}</p>
+                            <p>{{ order.o_price }}</p>
+                            </li>
+                        {% endfor %}
+                        
+                    </ul>
+                </li>
+            {% endfor %}
+
+        </ol>
+    </div>
+{% endblock %}
