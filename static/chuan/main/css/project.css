@@ -1,0 +1,293 @@
+.clear:after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
+.project-body {
+    background: #f5f5f5;
+    padding: 30px 0 0 0;
+}
+
+.project-all {
+    width: 78%;
+    margin: 0 auto;
+}
+
+.project-show {
+    width: 100%;
+    margin: 10px auto;
+    background: white;
+    padding: 20px 0 0 20px;
+}
+
+.project-introImg {
+    width: 70%;
+    float: left;
+    position: relative;
+}
+
+.zc-green-ing {
+    background-position: 0 -1482px;
+    background-image: url(/static/img/icon/zc-s00ef8f4c0e.png);
+    background-repeat: no-repeat;
+}
+
+.project-introImg i {
+    display: block;
+    position: absolute;
+    width: 110px;
+    height: 110px;
+}
+
+.project-introduce {
+    float: left;
+    width: 28%;
+}
+
+.p-title {
+    font-size: 24px;
+    line-height: 42px;
+    overflow: hidden;
+}
+
+.p-have {
+    font-size: 16px;
+    line-height: 24px;
+    margin: 10px 0 5px;
+}
+
+.p-num span {
+    font-size: 24px;
+    font-family: "Microsoft Yahei", "微软雅黑";
+}
+
+.p-num {
+    font-family: Arial;
+    font-size: 48px;
+    line-height: 60px;
+}
+
+.p-bar {
+    width: 100%;
+    height: 8px;
+    background: #e6e6e6;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.p-bar-purple {
+    width: 100%;
+    height: 100%;
+    background-position: 0 -8px;
+    background-image: url(/static/img/icon/bgs-s3b590d2981.png);
+    background-repeat: no-repeat;
+    border-radius: 4px;
+}
+
+.p-progress {
+    line-height: 32px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 5px;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.p-target {
+    margin-top: 5px;
+    color: #5e5e5e;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.p-target span {
+    color: #ff6262;
+    font-family: Arial;
+}
+
+.p-btns {
+    margin-top: 15px;
+}
+
+.p-btns img {
+    width: 20px;
+    height: 20px;
+}
+
+.not-follow {
+    display: block;
+    background: #2FD6A2;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+.not-follow span {
+    vertical-align: top;
+}
+
+.project-detail {
+    width: 100%;
+    margin-top: 20px;
+
+}
+
+.detail-l {
+    width: 68%;
+    float: left;
+    background: white;
+}
+
+.tab-wrap {
+    margin: 0 20px;
+    background: #fff;
+    height: 60px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.tab-name {
+    width: 20%;
+    float: left;
+    line-height: 56px;
+    text-align: center;
+    color: #323232;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.current-now {
+    color: #2fd6a2;
+    font-weight: 700;
+    border-bottom: 5px solid #2fd6a2;
+}
+
+.new-story-container {
+    width: 100%;
+    padding: 20px 40px;
+}
+
+.detail-imgs img {
+    width: 100%;
+    vertical-align:top;
+}
+
+.details-r {
+    float: right;
+    width: 30%;
+    margin-left: 20px;
+}
+
+.box-promoters {
+    padding: 0 20px 20px;
+    background: #fff;
+    border: 1px solid #f2f2f2;
+    box-shadow: 0 0 40px rgba(216, 216, 216, .5);
+}
+
+.common-title {
+    color: #323232;
+    font-size: 18px;
+    line-height: 56px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.promoters {
+    margin-top: 18px;
+}
+
+.promoters-img {
+    width: 30%;
+    float: left;
+}
+
+.promoters-img img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.promoters-detail {
+    float: left;
+    padding: 0 0 0 20px;
+}
+
+.promoters-name span {
+    color: #323232;
+}
+
+.promoters-num {
+    margin: 16px 0;
+}
+
+.promoters-btns a {
+    display: block;
+    line-height: 30px;
+    margin-right: 6px;
+    color: #5e5e5e;
+    font-size: 14px;
+    background: #f9f9f9;
+    text-align: center;
+    border: 1px solid #a5a5a5;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.goods-box {
+    background: white;
+    margin-top: 20px;
+    padding: 0 20px 20px;
+    border: 1px solid #f2f2f2;
+    box-shadow: 0 0 40px rgba(216, 216, 216, .5);
+}
+
+.t-price {
+    float: left;
+}
+
+.t-people {
+    float: right;
+    font-size: 14px;
+}
+
+.box-limit {
+    padding: 20px 0;
+}
+
+.promoters-title {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 14px;
+}
+
+.box-imglist img {
+    width: 40%;
+    margin-top: 10px;
+}
+
+.box-item {
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.subShopping {
+    border: 0;
+    background: #2fd6a2;
+    width: 50%;
+    padding: 0 30px;
+    color: #fff;
+    font-size: 18px;
+    line-height: 36px;
+    border-radius: 4px;
+    overflow: visible;
+    font-family: "Microsoft Yahei", "微软雅黑";
+    margin-top: 10px;
+}

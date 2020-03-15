@@ -197,6 +197,10 @@ em {
     border: 1px solid #C4C4C4;
 }
 
+.btns a:hover {
+    cursor: pointer;
+}
+
 .thickclose:link, .thickclose:visited {
     display: block;
     position: absolute;
@@ -222,4 +226,8 @@ a.aText {
 .aText:hover, .aText:active, .aText:link {
     color: #e4393c;
     text-decoration: none;
+}
+
+#addr-text {
+    color: #e4393c;
 }

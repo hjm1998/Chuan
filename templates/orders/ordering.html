@@ -18,7 +18,7 @@
                 <div class="headerTopRight">
                     {% if is_login %}
                         <p>您好，<a href="{% url 'users:mine' %}" style="color: #0f0f0f">{{ username }}</a>&nbsp;&nbsp;
-                            <a href="{% url 'users:login' %}" class="textTop">退出登录</a>&nbsp;|&nbsp;
+                            <a href="{% url 'users:logout' %}" class="textTop">退出登录</a>&nbsp;|&nbsp;
                             <a href="{% url 'users:mine_order' %}" class="textTop">我的订单</a>
                             {% else %}
                         <p>您好，请&nbsp;<a href="{% url 'users:login' %}" class="mine-login">登录</a>&nbsp;&nbsp;
@@ -154,63 +154,3 @@
         </div>
     </div>
 {% endblock %}
-
-{#{% block content %}#}
-{#    <div>#}
-{##}
-{#        <div>#}
-{#            <p>我的地址</p>#}
-{#            <ul id="address">#}
-{#                {% for addr in address %}#}
-{#                    {% if addr.a_is_default == 1 %}#}
-{#                        <li class="selected" addressid="{{ addr.id }}">#}
-{#                            {% else %}#}
-{#                        <li addressid="{{ addr.id }}">#}
-{#                    {% endif %}#}
-{#                <p>{{ addr.a_name }}{{ addr.a_phone }}{{ addr.a_code }}</p>#}
-{#                <p>{{ addr.a_address }}</p>#}
-{#                {% if addr.a_is_default %}#}
-{#                    <p>默认地址</p>#}
-{#                {% endif %}#}
-{#                </li>#}
-{##}
-{#                {% endfor %}#}
-{#            </ul>#}
-{#        </div>#}
-{#        <div class="cart">#}
-{#            {% for cart in carts %}#}
-{#                <ul>#}
-{#                    <li>#}
-{#                        <div class="col-md-4">#}
-{#                            <a href="">#}
-{#                                <img src="{{ MEDIA_KEY_PREFIX }}{{ cart.c_goods.g_img }}" alt="" height="90px">#}
-{#                            </a>#}
-{#                        </div>#}
-{#                        <div class="col-md-4">#}
-{#                            <p>{{ cart.c_goods.g_title }}</p>#}
-{#                        </div>#}
-{#                        <div class="col-md-4">#}
-{#                            <p>{{ cart.c_goods.g_price }}</p>#}
-{#                        </div>#}
-{#                    </li>#}
-{#                </ul>#}
-{#            {% endfor %}#}
-{#        </div>#}
-{#        <div class="Bill">#}
-{#            <div class="row">#}
-{#                <div class="col-md-1 all_select">#}
-{#                </div>#}
-{#                <div class="col-md-2">#}
-{#                    <span>共计：</span>#}
-{#                </div>#}
-{#                <div class="col-md-2">#}
-{#                    <span id="total_price">{{ total_price }}</span>#}
-{#                </div>#}
-{#                <div class="col-md-1">#}
-{#                    <button id="make_order">提交订单</button>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{##}
-{#{% endblock %}#}

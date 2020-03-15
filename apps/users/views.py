@@ -13,7 +13,7 @@ from Chuan.settings import MEDIA_KEY_PREFIX
 from merchant.models import Goods
 from orders.models import Cart, Order
 from orders.views_constant import ORDER_STATUS_NOT_PAY, ORDER_STATUS_NOT_SEND, ORDER_STATUS_NOT_RECEIVE
-from orders.views_helper import get_cart_num
+from orders.views_helper import get_cart_num, get_order_status
 from users.models import Users, Address
 from users.views_constant import HTTP_USER_EXIST, HTTP_OK, HTTP_EMAIL_EXIST
 from users.views_helper import hash_str, send_email_activate
@@ -129,7 +129,7 @@ def mine(request):
 
 def logout(request):
     request.session.flush()
-    return redirect(reverse('users:mine'))
+    return redirect(reverse('users:login'))
 
 
 def activate(request):
@@ -188,14 +188,9 @@ def address(request):
 def mine_order(request):
     user_id = request.user.id
     user = Users.objects.get(pk=user_id)
-    orders = Order.objects.filter(o_user_id=user_id).order_by('-o_time')
-
-
-    # data['username'] = user.u_username
-    # data['is_login'] = True
-    # data['order_not_pay'] = Order.objects.filter(o_user=user).filter(o_status=ORDER_STATUS_NOT_PAY).count()
-    # data['order_not_receive'] = Order.objects.filter(o_user=user).filter(
-    # o_status__in=[ORDER_STATUS_NOT_RECEIVE, ORDER_STATUS_NOT_SEND]).count()
+    orders = Order.objects.filter(o_user_id=user_id).order_by('-id')
+    for order in orders:
+        order.o_status = get_order_status(order.o_status)
     data = {
         'title': '我的订单',
         'is_login': True,
@@ -204,4 +199,34 @@ def mine_order(request):
         'MEDIA_KEY_PREFIX': MEDIA_KEY_PREFIX,
         'cart_num': get_cart_num(user_id)
     }
+    # data['username'] = user.u_username
+    # data['is_login'] = True
+    # data['order_not_pay'] = Order.objects.filter(o_user=user).filter(o_status=ORDER_STATUS_NOT_PAY).count()
+    # data['order_not_receive'] = Order.objects.filter(o_user=user).filter(
+    # o_status__in=[ORDER_STATUS_NOT_RECEIVE, ORDER_STATUS_NOT_SEND]).count()
     return render(request, 'user/mine_order.html', context=data)
+
+
+def deleteaddr(request):
+    addrid = request.GET.get('addrid')
+    addressid = Address.objects.get(pk=addrid)
+    addressid.delete()
+    data = {
+        'status': 200
+    }
+    return JsonResponse(data=data)
+
+
+def defaultaddr(request):
+    addrid = request.GET.get('addrid')
+    addrold = Address.objects.get(a_is_default=True)
+    addrold.a_is_default = not addrold.a_is_default
+    addrold.save()
+    addrnew = Address.objects.get(pk=addrid)
+    addrnew.a_is_default = not addrnew.a_is_default
+    addrnew.save()
+    data = {
+        'status': 200,
+        'addr_name': addrnew.a_name
+    }
+    return JsonResponse(data=data)

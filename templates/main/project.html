@@ -1,41 +1,158 @@
 {% extends 'base_project.html' %}
 {% load static %}
 
+{% block ext_css %}
+    {{ super.block }}
+    <link rel="stylesheet" href="{% static '/chuan/main/css/project.css' %}">
+{% endblock %}
+
 {% block ext_js %}
     {{ super.block }}
     <script type="text/javascript" src="{% static 'chuan/main/js/project.js' %}"></script>
 {% endblock %}
+
+
 {% block content %}
-    <div class="row">
-        <div class="col-md-8">
-            <img src="{{ MEDIA_KEY_PREFIX }}{{ projects.p_introImg }}" alt="">
-        </div>
-        <div class="col-md-4">
-            <h1>{{ projects.p_title }}</h1>
-            <h1>{{ projects.p_introText }}</h1>
-            <p>{{ projects.p_classify }}</p>
-            <p>{{ projects.p_days }}</p>
-            <p>{{ projects.p_follow }}</p>
-            <p>{{ projects.p_target }}</p>
-            <p>{{ projects.p_already }}</p>
-            <p>{{ projects.p_status }}</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-8">
-            <img src="{{ MEDIA_KEY_PREFIX }}{{ projects.p_detail }}" alt="">
-        </div>
-        <div class="col-md-4">
-            {% for goods in goods_list %}
-                <img src="{{ MEDIA_KEY_PREFIX }}{{ goods.g_img }}" alt="" height="90px">
-                <p>{{ goods.g_title }}</p>
-                <p>{{ goods.g_detail }}</p>
-                <p>{{ goods.g_price }}</p>
-                <p>{{ goods.g_sold }}</p>
-                <p>{{ goods.g_stock }}</p>
-                <p>{{ goods.g_postage }}</p>
-                <button goodsid="{{ goods.id }}" class="subShopping">放入心愿单</button>
-            {% endfor %}
+    <div class="project-body clear">
+        <div class="project-all">
+            <div class="project-show clear">
+                <div class="project-introImg clear">
+                    <i class="zc-green-ing"></i>
+                    <img src="{{ MEDIA_KEY_PREFIX }}{{ projects.p_introImg }}" alt="">
+                </div>
+                <div class="project-introduce">
+                    <h1 class="p-title">{{ projects.p_title }}</h1>
+                    <p class="p-have">已筹到</p>
+                    <p class="p-num"><span>￥</span>{{ projects.p_already }}</p>
+                    <div class="p-bar">
+                        <div class="p-bar-purple"></div>
+                    </div>
+                    <p class="p-progress clear">
+                        <span class="fl" style="color: rgb(161, 6, 224);">当前进度&nbsp;{% widthratio projects.p_already projects.p_target 100 %}%</span>
+                        <span class="fr">{{ sold }}人次支持</span>
+                    </p>
+                    <p class="p-target">
+                        此项目必须在
+                        <span class="f_red"> {{ year }} 年 {{ month }} 月 {{ day }} 日</span>
+                        前得到
+                        <span class="f_red"><i>￥</i>{{ projects.p_target }}</span>
+                        的支持才可成功！剩余
+                        <span class="f_red"> {{ remaining }} </span>天!
+                    </p>
+                    <p class="p-btns">
+                        <a id="a_focus" class="btn not-follow">
+                            <img src="{% static 'img/icon/like.png' %}" alt="" id="like-icon">
+                            <span id="focus">关注</span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="project-detail clear">
+                <div class="detail-l clear">
+                    <div class="tab-bg clear">
+                        <div class="tab-wrap clear">
+                            <h2 class="tab-name current-now">项目主页</h2>
+                            <h2 class="tab-name">项目进展</h2>
+                            <h2 class="tab-name">话题</h2>
+                        </div>
+                    </div>
+                    <div class="new-story-container">
+                        <div class="detail-imgs">
+                            {% for img in projects.projectdetail_set.all %}
+                            <img src="{{ MEDIA_KEY_PREFIX }}{{ img.p_detail }}" alt="">
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="details-r">
+                    <div class="details-right-fixed-box">
+                        <div class="box-promoters">
+                            <div class="common-title">项目发起人</div>
+                            <div class="promoters clear">
+                                <div class="promoters-img">
+                                    <a href="">
+                                        <img src="{{ MEDIA_KEY_PREFIX }}{{ projects.p_merchant.m_icon }}" alt="">
+                                    </a>
+                                </div>
+                                <div class="promoters-detail clear">
+                                    <div class="promoters-name">
+                                        <a href="">
+                                            <span>{{ projects.p_merchant.m_merchantName }}</span>
+                                        </a>
+                                    </div>
+                                    <div class="promoters-num">
+                                        <span>发起 {{ projects_count }}</span>
+                                    </div>
+                                    <div class="promoters-btns">
+                                        <a href="">发送私信</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% for goods in goods_list %}
+                        <div class="goods-box">
+                            <div class="common-title clear">
+                                <div class="t-price ">￥{{ goods.g_price }}</div>
+                                <div class="t-people">{{ goods.g_sold }} 位支持者</div>
+                            </div>
+                            <div class="box-content">
+                                <div class="box-limit">
+                                    <span class="limit-num">限额 {{ goods.g_stock }}份 | 剩余 {{ goods.stock }}份</span>
+                                </div>
+                                <p class="promoters-title">{{ goods.g_title }}</p>
+                                <p class="box-intro">{{ goods.g_detail }}</p>
+                                <div class="box-imglist">
+                                    <img src="{{ MEDIA_KEY_PREFIX }}{{ goods.g_img }}" alt="">
+                                </div>
+                                <p class="box-item">预计回报发送时间：项目众筹成功后30天内</p>
+                                <p class="box-btn">
+                                    <button goodsid="{{ goods.id }}" class="subShopping">放入购物车</button>
+                                </p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>
         </div>
     </div>
 {% endblock %}
+
+{#{% block content %}#}
+{#    <div class="row">#}
+{#        <div class="col-md-8">#}
+{#            <img src="{{ MEDIA_KEY_PREFIX }}{{ projects.p_introImg }}" alt="">#}
+{#        </div>#}
+{#        <div class="col-md-4">#}
+{#            <h1>{{ projects.p_title }}</h1>#}
+{#            <h1>{{ projects.p_introText }}</h1>#}
+{#            <p>{{ projects.p_classify }}</p>#}
+{#            <p>{{ projects.p_days }}</p>#}
+{#            <p>{{ projects.p_follow }}</p>#}
+{#            <p>{{ projects.p_target }}</p>#}
+{#            <p>{{ projects.p_already }}</p>#}
+{#            <p>{{ projects.p_status }}</p>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="row">#}
+{#        <div class="col-md-8">#}
+{#            <img src="{{ MEDIA_KEY_PREFIX }}{{ projects.p_detail }}" alt="">#}
+{#        </div>#}
+{#        <div class="col-md-4">#}
+{#            {% for goods in goods_list %}#}
+{#                <img src="{{ MEDIA_KEY_PREFIX }}{{ goods.g_img }}" alt="" height="90px">#}
+{#                <p>{{ goods.g_title }}</p>#}
+{#                <p>{{ goods.g_detail }}</p>#}
+{#                <p>{{ goods.g_price }}</p>#}
+{#                <p>{{ goods.g_sold }}</p>#}
+{#                <p>{{ goods.g_stock }}</p>#}
+{#                <p>{{ goods.g_postage }}</p>#}
+{#                <button goodsid="{{ goods.id }}" class="subShopping">放入心愿单</button>#}
+{#            {% endfor %}#}
+{#        </div>#}
+{#    </div>#}
+{#{% endblock %}#}

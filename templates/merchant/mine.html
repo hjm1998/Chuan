@@ -3,12 +3,23 @@
 
 {% block ext_css %}
     {{ block.super }}
+    <link rel="stylesheet" href="{% static '/chuan/merchant/css/mine.css' %}">
 {% endblock %}
 
-{% block content %}
-    {% if is_login %}
-        <p>{{ merchantName }}</p>
-        <p><a href="{% url 'merchant:publish' %}">发起众筹</a></p>
-        <p><a href="{% url 'merchant:logout' %}">退出</a></p>
-    {% endif %}
+{% block main %}
+    {{ block.super }}
+    <div class="userIcon">
+        <a href="">
+            <img src="{{ MEDIA_KEY_PREFIX }}{{ m_Icon }}" alt="">
+        </a>
+    </div>
 {% endblock %}
+
+
+{#{% block content %}#}
+{#    {% if is_login %}#}
+{#        <p>{{ merchantName }}</p>#}
+{#        <p><a href="{% url 'merchant:publish' %}">发起众筹</a></p>#}
+{#        <p><a href="{% url 'merchant:logout' %}">退出</a></p>#}
+{#    {% endif %}#}
+{#{% endblock %}#}

@@ -1,0 +1,72 @@
+.middleBox {
+    width: 100%;
+    height: 600px;
+    background: #f5f5f5;
+    border-top: 1px solid #f1f1f1;
+}
+
+.middle {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.menu {
+    width: 170px;
+    float: left;
+    background: white;
+}
+
+.menu dl dt {
+    height: 28px;
+    line-height: 28px;
+    color: #333;
+    font-weight: 700;
+}
+
+.menu dl {
+    padding: 15px 20px;
+    border-bottom: 1px solid #f3f3f3;
+}
+
+.menu dt {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.menu dd {
+    font-size: 14px;
+}
+
+.menu dd, .menu dt {
+    line-height: 32px;
+}
+
+.menu a {
+    color: #333333;
+    text-decoration: none;
+}
+
+.menu a:hover {
+    color: #B81B22;
+}
+
+.main {
+    float: left;
+    padding: 20px 0 0 20px;
+    width: 1030px;
+}
+
+.userIcon {
+    width: 150px;
+    height: 150px;
+}
+
+.userIcon img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.mainTip {
+    float: left;
+}

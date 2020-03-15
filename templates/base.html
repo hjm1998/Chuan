@@ -23,7 +23,7 @@
                 <div class="headerTopRight">
                     {% if is_login %}
                         <p>您好，<a href="{% url 'users:mine' %}" style="color: #0f0f0f">{{ username }}</a>&nbsp;&nbsp;
-                            <a href="{% url 'users:login' %}" class="textTop">退出登录</a>&nbsp;|&nbsp;
+                            <a href="{% url 'users:logout' %}" class="textTop">退出登录</a>&nbsp;|&nbsp;
                             <a href="{% url 'users:mine_order' %}" class="textTop">我的订单</a>
                             {% else %}
                         <p>您好，请&nbsp;<a href="{% url 'users:login' %}" class="mine-login">登录</a>&nbsp;&nbsp;
@@ -49,14 +49,21 @@
 
             <div class="search">
                 <div class="searchTab">
-                    <input type="text" placeholder="请输入..." name="" id="" value=""/>
-                    <button><i>搜索</i></button>
+                    <input type="text" placeholder="请输入..." name="" id="search-input" value=""/>
+                    <button id="search-submit"><i>搜索</i></button>
                 </div>
                 <div class="cart">
                     <img class="cart-img" src="/static/img/icon/cart.png" alt="">
-                    <p class="cart-text"><a href="{% url 'orders:cart' %}" id="cart-aText">购物车(<span>{{ cart_num }}</span>)</a></p>
+                    {% if is_login %}
+                        <p class="cart-text"><a href="{% url 'orders:cart' %}"
+                                                id="cart-aText">购物车(<span>{{ cart_num }}</span>)</a></p>
+                    {% else %}
+                        <p class="cart-text"><a href="{% url 'orders:cart' %}" id="cart-aText">购物车(<span>0</span>)</a>
+                        </p>
+                    {% endif %}
                 </div>
             </div>
+
         </div>
         <div class="clearfix"></div>
     </div>
@@ -72,6 +79,7 @@
 
 <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+<script type="text/javascript" src="{% static 'chuan/main/js/base.js' %}"></script>
 {% block ext_js %}
 
 {% endblock %}

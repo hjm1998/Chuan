@@ -1,0 +1,83 @@
+{% extends 'merchant/mine.html' %}
+{% load static %}
+
+{% block ext_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static '/chuan/merchant/css/mine_order.css' %}">
+{% endblock %}
+
+{% block main %}
+    <div class="mainTip">
+        <div>我的订单</div>
+    </div>
+
+    <div class="myOrder">
+        <div class="mt">
+            <ul>
+                <li><a href="#" class="selected">全部订单</a></li>
+                <li><a href="#" class="notSelect">待发款</a></li>
+                <li><a href="#" class="notSelect">已完成</a></li>
+                <li><a href="#" class="notSelect">已评价</a></li>
+            </ul>
+        </div>
+
+
+        <div class="mc">
+
+            <table>
+                <thead>
+                <tr>
+                    <th>订单详细</th>
+                    <th>收货人</th>
+                    <th>金额</th>
+                    <th>订单状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+
+                {% for order in orders %}
+                    <tbody>
+                    <tr class="sep-row">
+                        <td colspan="5"></td>
+                    </tr>
+                    <tr class="tr-th">
+                        <td colspan="5"><p>{{ order.o_time }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;订单号:{{ order.id }}</p></td>
+                    </tr>
+
+
+                    {% for goods in order.ordergoods_set.all %}
+                        <tr class="tr-bd">
+                            <td class="goods-detail">
+                                <div class="goods-item">
+                                    <div class="g-img"><img src="{{ MEDIA_KEY_PREFIX }}{{ goods.o_goods.g_img }}" alt=""
+                                                            class="goods-img"></div>
+                                    <div class="p-msg"><a href="">
+                                        {{ goods.o_goods.g_project.p_merchant.m_merchantName }}&nbsp;&nbsp;{{ goods.o_goods.g_title }}</a>
+                                    </div>
+                                    <div class="goods-number">x{{ goods.o_goods_num }}</div>
+
+                                </div>
+                            </td>
+
+                            {% if forloop.counter == 1 %}
+                                <td rowspan="{{ order.ordergoods_set.all.count }}">{{ order.addresscopy_set.first.a_name }}</td>
+                                <td rowspan="{{ order.ordergoods_set.all.count }}">总额 ¥{{ order.o_price }} <br> <br>
+                                    在线支付
+                                </td>
+                                <td rowspan="{{ order.ordergoods_set.all.count }}">{{ order.o_status|first }} <br> <br> <a href="#">{{ order.o_status|last }}</a></td>
+                                <td rowspan="{{ order.ordergoods_set.all.count }}">查看发票</td>
+                            {% endif %}
+
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                {% endfor %}
+
+
+            </table>
+        </div>
+
+    </div>
+
+{% endblock %}

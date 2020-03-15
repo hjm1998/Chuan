@@ -3,8 +3,7 @@ $(function () {
         var addressid = $("#address").find("li[class=selected]").attr("addressid");
         $.getJSON('/orders/makeorder/', {'addressid': addressid}, function (data) {
             if (data['status'] === 200) {
-                // window.open("/orders/orderdetail/?orderid=" + data['order_id'], target = "_self")
-                window.open("/orders/hello/", target = "_self")
+                window.open("/orders/orderdetail/?orderid=" + data['order_id'], target = "_self")
             }
         })
     });
@@ -25,3 +24,4 @@ $(function () {
         $(this).addClass('pay-selected');                            // 添加当前元素的样式
     });
 });
+

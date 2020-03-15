@@ -23,3 +23,14 @@ def get_cart_num(user_id):
     for cart in carts:
         num += cart.c_goods_num
     return num
+
+
+def get_order_status(status):
+    if status == 1:
+        return ['待付款', '付款']
+    elif status == 2:
+        return ['待收货', '提醒发货']
+    elif status == 3:
+        return ['待收货', '查看物流']
+    elif status == 4:
+        return ['待评价', '评价']

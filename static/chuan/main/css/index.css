@@ -1,0 +1,169 @@
+.clear:after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
+.index-content {
+    width: 78%;
+    margin: 30px auto;
+}
+
+.project-Carousel {
+    width: 66%;
+    float: left;
+}
+
+.project-recommend {
+    float: left;
+    width: 34%;
+    padding: 10px 0 0 30px;
+}
+
+.recommend-tip {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.recommend-img {
+    width: 40%;
+    float: left;
+}
+
+.recommend-img img {
+    width: 100%;
+}
+
+.recommend-text {
+    width: 60%;
+    float: left;
+    padding-left: 10px;
+}
+
+.recommend-text a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    color: black;
+    margin-bottom: 10px;
+}
+
+.recommend-text span {
+    display: block;
+    color: #037362;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.recommend-show li {
+    margin-bottom: 20px;
+}
+
+.tab-div {
+    height: 800px;
+    margin-top: 40px;
+    overflow: hidden;
+    border: 1px solid #f2f2f2;
+    box-shadow: 0 0 40px rgba(216, 216, 216, .5);
+}
+
+.title {
+    border-bottom: 1px solid #e6e6e6;
+    margin-top: 70px;
+    background: #fff;
+    line-height: 54px;
+    font-size: 24px;
+    margin-left: 14px;
+    color: #323232;
+    font-weight: 700;
+}
+
+.infor-box {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+}
+
+.tab-ul li {
+    width: 48%;
+    float: left;
+    position: relative;
+    margin-right: 22px;
+    border: 1px solid #f2f2f2;
+    box-shadow: 0 0 40px rgba(216, 216, 216, .5);
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.infor-top {
+    padding-top: 15px;
+}
+
+.pro-name {
+    float: left;
+    color: #323232;
+    font-weight: 700;
+    font-size: 14px;
+    height: 20px;
+    max-width: 310px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.title-box {
+    float: right;
+}
+
+.title-box a {
+    float: right;
+    display: block;
+    padding: 0 8px;
+    height: 18px;
+    line-height: 18px;
+    border: 1px solid #e6e6e6;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    color: #a5a5a5;
+    margin-right: 5px;
+    cursor: pointer;
+    transition: all .5s;
+    width: auto !important;
+}
+
+.infor-bottom {
+    margin-top: 15px;
+}
+
+.process-area {
+    float: left;
+    position: relative;
+    top: 6px;
+}
+
+.process-area .process-box {
+    width: 310px;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: #e6e6e6;
+}
+
+.process-area .process-box .process-green {
+    height: 8px;
+    background-image: url(/static/img/icon/bgs-s3b590d2981.png);
+    background-repeat: no-repeat;
+}
+
+.had-got-area {
+    float: right;
+}
+
+.had-got-area span {
+    font-size: 14px;
+    color: #323232;
+}

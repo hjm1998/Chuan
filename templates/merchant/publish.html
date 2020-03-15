@@ -3,83 +3,213 @@
 
 {% block ext_css %}
     {{ block.super }}
+    <link rel="stylesheet" href="{% static 'chuan/merchant/css/publish.css' %}">
 {% endblock %}
 
 {% block ext_js %}
     {{ block.super }}
-    <script type="text/javascript" src="{% static 'js/ckeditor.js' %}"></script>
+    <script type="text/javascript" src="{% static 'chuan/merchant/js/publish.js' %}"></script>
 {% endblock %}
 
 {% block content %}
-    <form method="post" class="center-block" style="width: 800px;" action="{% url 'merchant:publish' %}"
+
+    <div class="uploadImgBtn" id="uploadImgBtn">
+        <input class="uploadImg" type="file" name="file" multiple id="file">
+    </div>
+
+
+
+    <form method="post" class="center-block" action="{% url 'merchant:publish' %}"
           enctype="multipart/form-data">
+        <div class="publish">
 
-        {% csrf_token %}
+            <div id="project-module">
+                <div class="publish-top">
+                    <h3>发布新的项目</h3>
+                </div>
 
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-2">
-                    <select name="p_classify" class="form-control" style="width: 100px;">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
+
+                {% csrf_token %}
+
+                <div class="publish-content clear">
+                    <div class="choose-type clear">
+                        <div class="text-tip">选择类型</div>
+                        <select name="p_classify" class="form-control" style="width: 100px;">
+                            <option value="科技">科技</option>
+                            <option value="设计">设计</option>
+                            <option value="漫画">漫画</option>
+                            <option value="影片">影片</option>
+                            <option value="游戏">游戏</option>
+                            <option value="其他">其他</option>
+                        </select>
+                    </div>
+                    <span class="clear">&nbsp;/&nbsp;</span>
+                    <div class="project-title clear">
+                        <div class="text-tip">填写项目标题</div>
+                        <input type="text" class="form-control" placeholder="项目标题" name="p_title">
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <input name="p_title" type="text" class="form-control" id="p_title" placeholder="请输入众筹标题">
+
+                <div class="project-intro">
+                    <div class="text-tip">项目简介（140字）以内</div>
+                    <textarea placeholder="项目简介" class="project-introText" name="p_introText"></textarea>
                 </div>
+
+                <div>
+                    <div class="text-tip">上传简介图片</div>
+                    <input type="file" name="p_introImg">
+{#                    <div class="chuans">#}
+{#                        <img src="/static/img/icon/addimg.png" alt="" data-imgsrc="/static/img/icon/addimg.png">#}
+{#                        <input class="uploadImg file1" type="file" multiple="multiple" name="p_introImg">#}
+{#                        <span class="delx Hui-iconfont">&#xe60b;czxvxcv</span>#}
+{#                    </div>#}
+                </div>
+
+                <div class="project-Texts clear">
+                    <div class="text-tip" style="float: left">目标金额</div>
+                    <input type="text" placeholder="目标金额" class="form-control project-inputText" name="p_target">
+                </div>
+
+                <div class="project-Texts clear">
+                    <div class="text-tip" style="float: left">众筹天数</div>
+                    <input type="text" placeholder="众筹天数" class="form-control project-inputText" name="p_days">
+                </div>
+
+                <div>
+                    <div class="text-tip">上传详细图片</div>
+                    <input type="file" multiple="multiple" name="p_detail">
+                </div>
+
+                <button type="button" class="btn btn-primary project-btn" onclick="projectHide()">下一步</button>
+
             </div>
-            <div class="row">
-                <div class="col-md-2">
-                    <input name="p_days" type="text" class="form-control" id="p_days" placeholder="请输入众筹期限">
+
+            <div id="goods-module" style="display: none">
+
+                <button type="button" class="btn btn-primary return-btn" onclick="projectShow()">上一步</button>
+
+
+                <div>
+                    <button type="button" id="newGoods" style="margin-top: 15px">新建一个商品</button>
                 </div>
-                <div class="col-md-2">
-                    <input name="p_target" type="text" class="form-control" id="p_target" placeholder="目标金额">
+
+                <div id="goods-list">
+{#                    <div id="new-goods">#}
+{#                        <div class="goods-Texts clear">#}
+{#                            <div class="text-tip" style="float: left">商品名称</div>#}
+{#                            <input type="text" placeholder="商品名称" class="form-control goods-inputText" name="g_title">#}
+{#                        </div>#}
+{##}
+{#                        <div class="goods-Texts clear">#}
+{#                            <div class="text-tip" style="float: left">商品简介</div>#}
+{#                            <textarea placeholder="项目简介" class="goods-introText" name="g_detail"></textarea>#}
+{#                        </div>#}
+{##}
+{#                        <div class="goods-Texts clear">#}
+{#                            <div class="text-tip" style="float: left">商品价格</div>#}
+{#                            <input type="text" placeholder="商品价格" class="form-control goods-inputText" name="g_price">#}
+{#                        </div>#}
+{##}
+{#                        <div class="goods-Texts clear">#}
+{#                            <div class="text-tip" style="float: left">商品库存</div>#}
+{#                            <input type="text" placeholder="商品库存" class="form-control goods-inputText" name="g_stock">#}
+{#                        </div>#}
+{##}
+{#                        <div>#}
+{#                            <div class="text-tip">上传商品封面</div>#}
+{#                            <input type="file" name="g_img">#}
+{#                        </div>#}
+{##}
+{#                        <button type="button" class="btn btn-success goods-add-btn" id="addGoods" id="addGoods">#}
+{#                            新建商品#}
+{#                        </button>#}
+{##}
+{#                        <button type="button" class="btn btn-default goods-add-btn" id="delGoods" id="delGoods">#}
+{#                            取消#}
+{#                        </button>#}
+{#                    </div>#}
                 </div>
+
+                <div class="publish-btn">
+                    <button type="submit" class="btn btn-success">发布项目
+                    </button>
+                </div>
+
             </div>
         </div>
-        <div class="form-group">
-            <label for="p_introText">内容简介</label>
-            <textarea name="p_introText" class="form-control" rows="3" id="p_introText" placeholder="内容简介"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="p_introImg">简介图片</label>
-            <input name="p_introImg" type="file" id="p_introImg" multiple>
-        </div>
-        <div class="form-group">
-            <label for="p_detail">详细图片</label>
-            <input name="p_detail" type="file" id="p_detail" multiple>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-4">
-                    <label for="g_title">商品标题</label>
-                    <input name="g_title" type="text" class="form-control" id="g_title" placeholder="商品标题">
-                </div>
-                <div class="col-md-2">
-                    <label for="g_price">商品价格</label>
-                    <input name="g_price" type="text" class="form-control" id="g_price" placeholder="商品价格">
-                </div>
-                <div class="col-md-2">
-                    <label for="g_stock">商品库存</label>
-                    <input name="g_stock" type="text" class="form-control" id="g_stock" placeholder="商品库存">
-                </div>
-                <div class="col-md-2">
-                    <label for="g_postage">配送费</label>
-                    <input name="g_postage" type="text" class="form-control" id="g_postage" placeholder="配送费">
-                </div>
-                <div class="col-md-12">
-                    <label for="g_detail">商品详细</label>
-                    <input name="g_detail" type="text" class="form-control" id="g_detail" placeholder="Jane Doe">
-                </div>
-                <div class="form-group">
-                    <label for="g_img">商品图片</label>
-                    <input name="g_img" type="file" id="g_img" multiple>
-                </div>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
     </form>
 {% endblock %}
+
+{#{% block content %}#}
+{#    <form method="post" class="center-block" style="width: 800px;" action="{% url 'merchant:publish' %}"#}
+{#          enctype="multipart/form-data">#}
+{##}
+{#        {% csrf_token %}#}
+{##}
+{#        <div class="form-group">#}
+{#            <div class="row">#}
+{#                <div class="col-md-2">#}
+{#                    <select name="p_classify" class="form-control" style="width: 100px;">#}
+{#                        <option value="电子">电子</option>#}
+{#                        <option value="设计">设计</option>#}
+{#                        <option value="漫画">漫画</option>#}
+{#                        <option value="影片">影片</option>#}
+{#                        <option value="游戏">游戏</option>#}
+{#                    </select>#}
+{#                </div>#}
+{#                <div class="col-md-6">#}
+{#                    <input name="p_title" type="text" class="form-control" id="p_title" placeholder="请输入众筹标题">#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="row">#}
+{#                <div class="col-md-2">#}
+{#                    <input name="p_days" type="text" class="form-control" id="p_days" placeholder="请输入众筹期限">#}
+{#                </div>#}
+{#                <div class="col-md-2">#}
+{#                    <input name="p_target" type="text" class="form-control" id="p_target" placeholder="目标金额">#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="form-group">#}
+{#            <label for="p_introText">内容简介</label>#}
+{#            <textarea name="p_introText" class="form-control" rows="3" id="p_introText" placeholder="内容简介"></textarea>#}
+{#        </div>#}
+{#        <div class="form-group">#}
+{#            <label for="p_introImg">简介图片</label>#}
+{#            <input name="p_introImg" type="file" id="p_introImg" multiple>#}
+{#        </div>#}
+{#        <div class="form-group">#}
+{#            <label for="p_detail">详细图片</label>#}
+{#            <input name="p_detail" type="file" id="p_detail" multiple>#}
+{#        </div>#}
+{#        <div class="form-group">#}
+{#            <div class="row">#}
+{#                <div class="col-md-4">#}
+{#                    <label for="g_title">商品标题</label>#}
+{#                    <input name="g_title" type="text" class="form-control" id="g_title" placeholder="商品标题">#}
+{#                </div>#}
+{#                <div class="col-md-2">#}
+{#                    <label for="g_price">商品价格</label>#}
+{#                    <input name="g_price" type="text" class="form-control" id="g_price" placeholder="商品价格">#}
+{#                </div>#}
+{#                <div class="col-md-2">#}
+{#                    <label for="g_stock">商品库存</label>#}
+{#                    <input name="g_stock" type="text" class="form-control" id="g_stock" placeholder="商品库存">#}
+{#                </div>#}
+{#                <div class="col-md-2">#}
+{#                    <label for="g_postage">配送费</label>#}
+{#                    <input name="g_postage" type="text" class="form-control" id="g_postage" placeholder="配送费">#}
+{#                </div>#}
+{#                <div class="col-md-12">#}
+{#                    <label for="g_detail">商品详细</label>#}
+{#                    <input name="g_detail" type="text" class="form-control" id="g_detail" placeholder="Jane Doe">#}
+{#                </div>#}
+{#                <div class="form-group">#}
+{#                    <label for="g_img">商品图片</label>#}
+{#                    <input name="g_img" type="file" id="g_img" multiple>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        <button type="submit" class="btn btn-default">Submit</button>#}
+{#    </form>#}
+{#{% endblock %}#}

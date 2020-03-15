@@ -1,6 +1,6 @@
 from django.db import models
 
-from merchant.models import Goods, Project
+from merchant.models import Goods, Project, Merchant
 from orders.views_constant import ORDER_STATUS_NOT_PAY
 from users.models import Users
 
@@ -18,8 +18,9 @@ class Cart(models.Model):
 
 class Order(models.Model):
     o_user = models.ForeignKey(Users, on_delete=models.CASCADE, verbose_name='用户ID')
+    o_merchant = models.ForeignKey(Merchant, on_delete=models.CASCADE, verbose_name='商家ID')
     o_price = models.FloatField(default=0, verbose_name='订单价格')
-    o_time = models.DateTimeField(auto_now=True, verbose_name='下单时间')
+    o_time = models.DateTimeField(auto_now_add=True, verbose_name='下单时间')
     o_status = models.IntegerField(default=ORDER_STATUS_NOT_PAY, verbose_name='订单状态')
 
     class Meta:

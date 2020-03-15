@@ -1,0 +1,86 @@
+{% extends 'base_main.html' %}
+{% load static %}
+
+{% block ext_css %}
+    <link rel="stylesheet" href="{% static 'chuan/main/css/search.css' %}">
+{% endblock %}
+
+{% block header %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <div class="search-all">
+        <div class="search-container">
+            <div class="l-header">
+                <div class="l-topNav clear">
+                    <div class="l-classify clear"><span>分类：</span></div>
+                    <ul class="l-list clear">
+                        <li>
+                            <a href="" class="cur">全部</a>
+                        </li>
+                        <li>
+                            <a href="">科技</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="search-content">
+
+                {% if search %}
+                    {% for project in projects %}
+                        <div class="search-show clear">
+                            <div class="search-img clear">
+                                <a href="{% url 'orders:project' %}?projectid={{ project.id }}" target="_blank">
+                                    <img src="{{ MEDIA_KEY_PREFIX }}{{ project.p_introImg }}" alt="">
+                                </a>
+                            </div>
+                            <div class="search-text clear">
+                                <a href="{% url 'orders:project' %}?projectid={{ project.id }}" target="_blank">
+                                    <h2>{{ project.p_title }}</h2>
+                                </a>
+                                <p>{{ project.p_introText }}</p>
+                                <div class="process-area">
+                                    <div class="process-box">
+                                        <div class="process-full process-green" style="width: {% widthratio project.p_already project.p_target 100 %}%;"></div>
+                                    </div>
+                                </div>
+                                <p>已筹到 ￥<span>{{ project.p_already }}</span></p>
+                                <p>已达&nbsp;{% widthratio project.p_already project.p_target 100 %}%</p>
+                                <p>{{ project.sold }}人次支持</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="search-warn">没找到您想要查询的，看看其他项目吧</div>
+                    {% for project in projects %}
+                        <div class="search-show clear">
+                            <div class="search-img clear">
+                                <a href="{% url 'orders:project' %}?projectid={{ project.id }}" target="_blank">
+                                    <img src="{{ MEDIA_KEY_PREFIX }}{{ project.p_introImg }}" alt="">
+                                </a>
+                            </div>
+                            <div class="search-text clear">
+                                <a href="{% url 'orders:project' %}?projectid={{ project.id }}" target="_blank">
+                                    <h2>{{ project.p_title }}</h2>
+                                </a>
+                                <p>{{ project.p_introText }}</p>
+                                <div class="process-area">
+                                    <div class="process-box">
+                                        <div class="process-full process-green" style="width: {% widthratio project.p_already project.p_target 100 %}%;"></div>
+                                    </div>
+                                </div>
+                                <p>已筹到 ￥<span>{{ project.p_already }}</span></p>
+                                <p>已达&nbsp;{% widthratio project.p_already project.p_target 100 %}%</p>
+                                <p>{{ project.sold }}人次支持</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

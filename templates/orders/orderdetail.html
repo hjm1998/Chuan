@@ -1,29 +1,103 @@
 {% extends 'base_orders.html' %}
 {% load static %}
 
+{% block ext_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'chuan/orders/css/orderdetail.css' %}">
+{% endblock %}
+
 {% block ext_js %}
     {{ block.super }}
     <script src="{% static 'chuan/orders/js/order_detail.js' %}"></script>
 {% endblock %}
+
 {% block content %}
-    <div class="container" id="order_detail">
-        <p>订单编号：{{ order.id }}</p>
-        <p>收货地址</p>
-        <div>
-            <p>{{ address.a_name }} {{ address.a_phone }} {{ address.a_code }}</p>
-            <p>{{ address.a_address }}</p>
+    <div class="content">
+        <div class="w">
+
+            <div class="od-top">
+                <a href="{% url 'users:mine' %}">我的众筹</a>
+                <span>
+                    &nbsp;>&nbsp;
+                    <a href="{% url 'users:mine_order' %}">订单中心</a>
+                    &nbsp;>&nbsp;
+                    <strong>订单：{{ order.id }}</strong>
+                </span>
+            </div>
+
+            <div class="od-status clear">
+                <div class="state-lcol">
+                    <div class="state-top">订单：{{ order.id }}</div>
+                    <h3 class="state-txt">{{ status|first }}</h3>
+                    <div class="state-btns"><a id="alipay" orderid="{{ order.id }}">{{ status|last }}</a></div>
+
+                </div>
+                <div class="od-addr">
+                    <div class="dt"><h4>收货人信息</h4></div>
+                    <div class="dd">收货人：{{ address.a_name }}</div>
+                    <div class="dd">地址：{{ address.a_address }}</div>
+                    <div class="dd">手机号：{{ address.a_phone }}</div>
+                </div>
+            </div>
+
+            <div class="od-merchant">{{ order.ordergoods_set.first.o_goods.g_project.p_merchant.m_merchantName }}</div>
+
+            <div class="od-goods">
+                <div class="od-good-top clear">
+                    <div class="od-good">商品</div>
+                    <div class="od-price">价格</div>
+                    <div class="od-num">数量</div>
+                </div>
+
+                {% for goods in order.ordergoods_set.all %}
+
+
+
+                    <div class="od-good-content clear">
+                        <div class="od-good-img">
+                            <img src="{{ MEDIA_KEY_PREFIX }}{{ goods.o_goods.g_img }}" alt="">
+
+                            <div class="od-good-title">{{ goods.o_goods.g_title }}</div>
+                        </div>
+                        <div class="od-good-price">￥{{ goods.o_goods.g_price }}</div>
+                        <div class="od-good-price">{{ goods.o_goods_num }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+
+
+            <div class="od-bottom clear">
+                <div class="od-bottom-text clear">
+                    <div class="od-bottom-money clear">商品总额：<span>¥{{ order.o_price }}</span></div>
+                    <div class="clear"></div>
+                    <div class="od-bottom-pay">应付总额：<span id="od-count">¥{{ order.o_price }}</span></div>
+                </div>
+            </div>
+
         </div>
-        <ul>
-            {% for ordergoods in order.ordergoods_set.all %}
-                <li>
-                    <img src="{{ MEDIA_KEY_PREFIX }}{{ ordergoods.o_goods.g_img }}" height="90px">
-                    <p>{{ ordergoods.o_goods.g_title }}</p>
-                    <p>{{ order.o_price }}</p>
-                    <p>{{ ordergoods.o_goods_num }}</p>
-                </li>
-            {% endfor %}
-        </ul>
-        <p id="total_price">总价：{{ order.o_price }}</p>
-        <button id="alipay" orderid="{{ order.id }}">支付</button>
     </div>
 {% endblock %}
+
+
+{#{% block content %}#}
+{#    <div class="container" id="order_detail">#}
+{#        <p>订单编号：{{ order.id }}</p>#}
+{#        <p>收货地址</p>#}
+{#        <div>#}
+{#            <p>{{ address.a_name }} {{ address.a_phone }} {{ address.a_code }}</p>#}
+{#            <p>{{ address.a_address }}</p>#}
+{#        </div>#}
+{#        <ul>#}
+{#            {% for ordergoods in order.ordergoods_set.all %}#}
+{#                <li>#}
+{#                    <img src="{{ MEDIA_KEY_PREFIX }}{{ ordergoods.o_goods.g_img }}" height="90px">#}
+{#                    <p>{{ ordergoods.o_goods.g_title }}</p>#}
+{#                    <p>{{ order.o_price }}</p>#}
+{#                    <p>{{ ordergoods.o_goods_num }}</p>#}
+{#                </li>#}
+{#            {% endfor %}#}
+{#        </ul>#}
+{#        <p id="total_price">总价：{{ order.o_price }}</p>#}
+{#        <button >支付</button>#}
+{#    </div>#}
+{#{% endblock %}#}

@@ -4,9 +4,12 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from Chuan.settings import MEDIA_KEY_PREFIX
-from merchant.models import Merchant, Project, Goods
+from Chuan.settings import MEDIA_KEY_PREFIX, MEDIA_ROOT
+from merchant.models import Merchant, Project, Goods, ProjectDetail
 from merchant.views_contant import HTTP_ID_CART_EXIST, HTTP_MERCHANT_EXIST, HTTP_PHONE_EXIST, HTTP_EMAIL_EXIST
+from merchant.views_helper import get_merchant_login_status, get_merchant_order_status
+from orders.models import Order
+from orders.views_helper import get_order_status
 
 
 def hello(request):
@@ -131,15 +134,15 @@ def login(request):
 
 
 def mine(request):
-    merchant_id = request.session.get('merchant_id')
+    merchant_id = request.merchant.id
     data = {
-        'title': '我的',
-        'is_login': False
+        'title': '我的中心',
+        'is_login': True,
+        'MEDIA_KEY_PREFIX': MEDIA_KEY_PREFIX,
     }
-    if merchant_id:
-        merchant = Merchant.objects.get(pk=merchant_id)
-        data['merchantName'] = merchant.m_merchantName
-        data['is_login'] = True
+    merchant = Merchant.objects.get(pk=merchant_id)
+    data['merchantName'] = merchant.m_merchantName
+    data['m_Icon'] = merchant.m_icon
 
     return render(request, 'merchant/mine.html', context=data)
 
@@ -153,40 +156,70 @@ def publish(request):
     if request.method == "GET":
         data = {
             'title': '发起众筹',
+            'is_login': True
         }
+        merchant_id = request.merchant.id
+        merchant = Merchant.objects.get(pk=merchant_id)
+        data['merchantName'] = merchant.m_merchantName
         return render(request, 'merchant/publish.html', context=data)
     elif request.method == "POST":
         p_title = request.POST.get('p_title')
         p_introText = request.POST.get('p_introText')
         p_classify = request.POST.get('p_classify')
         p_introImg = request.FILES.get('p_introImg')
-        p_detail = request.FILES.get('p_detail')
+        p_detail = request.FILES.getlist('p_detail')
         p_days = request.POST.get('p_days')
         p_target = request.POST.get('p_target')
-        g_title = request.POST.get('g_title')
-        g_detail = request.POST.get('g_detail')
-        g_price = request.POST.get('g_price')
-        g_stock = request.POST.get('g_stock')
-        g_postage = request.POST.get('g_postage')
-        g_img = request.FILES.get('g_img')
+        g_title = request.POST.getlist('g_title')
+        g_detail = request.POST.getlist('g_detail')
+        g_price = request.POST.getlist('g_price')
+        g_stock = request.POST.getlist('g_stock')
+        g_img = request.FILES.getlist('g_img')
 
         project = Project()
         project.p_title = p_title
         project.p_introText = p_introText
         project.p_classify = p_classify
-        project.p_introImg = p_introImg
-        project.p_detail = p_detail
         project.p_days = p_days
         project.p_target = p_target
         project.p_merchant = request.merchant
+        project.p_introImg = p_introImg
         project.save()
-        goods = Goods()
-        goods.g_project_id = project.id
-        goods.g_title = g_title
-        goods.g_detail = g_detail
-        goods.g_price = g_price
-        goods.g_stock = g_stock
-        goods.g_postage = g_postage
-        goods.g_img = g_img
-        goods.save()
-        return HttpResponse('hehe')
+        # project.p_detail = p_detail
+        for detailt in p_detail:
+            detailtImg = ProjectDetail()
+            detailtImg.p_project = project
+            detailtImg.p_detail = detailt
+            detailtImg.save()
+
+
+        for i in range(len(g_title)):
+            goods = Goods()
+            goods.g_project_id = project.id
+            goods.g_title = g_title[i]
+            goods.g_detail = g_detail[i]
+            goods.g_price = g_price[i]
+            goods.g_stock = g_stock[i]
+            goods.g_img = g_img[i]
+            goods.save()
+
+        return redirect(reverse('merchant:mine'))
+
+
+def mine_order(request):
+    merchant_id = request.merchant
+    print(merchant_id)
+    orders = Order.objects.filter(o_merchant_id=merchant_id).exclude(o_status=1).order_by('-id')
+    for order in orders:
+        order.o_status = get_merchant_order_status(order.o_status)
+
+    data = {
+        'title': '我的订单',
+        'is_login': True,
+        'orders': orders,
+        'MEDIA_KEY_PREFIX': MEDIA_KEY_PREFIX,
+    }
+    # 获取登录信息
+    merchant = Merchant.objects.get(pk=merchant_id.id)
+    data['merchantName'] = merchant.m_merchantName
+    return render(request, 'merchant/mine_order.html', context=data)

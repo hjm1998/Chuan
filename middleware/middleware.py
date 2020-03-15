@@ -23,11 +23,17 @@ REQUIRE_LOGIN = [
     '/orders/ordering/',
     '/users/mine/',
     '/users/mineorder/',
+    '/orders/cart/',
+    '/orders/ordering/',
+    '/orders/orderdetail/',
 ]
 
 REQUIRE_LOGIN_MERCHANT = [
     '/merchant/publish/',
+    '/merchant/mine/',
+    '/merchant/mineorder/',
 ]
+
 
 class LoginMiddleware(MiddlewareMixin):
 

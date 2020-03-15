@@ -64,7 +64,7 @@
                                 <td rowspan="{{ order.ordergoods_set.all.count }}">总额 ¥{{ order.o_price }} <br> <br>
                                     在线支付
                                 </td>
-                                <td rowspan="{{ order.ordergoods_set.all.count }}">已完成 <br> <br> 订单详情</td>
+                                <td rowspan="{{ order.ordergoods_set.all.count }}">{{ order.o_status|first }} <br> <br> <a href="{% url 'orders:order_detail' %}?orderid={{ order.id }}">订单详情</a></td>
                                 <td rowspan="{{ order.ordergoods_set.all.count }}">查看发票</td>
                             {% endif %}
 

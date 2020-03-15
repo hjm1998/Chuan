@@ -1,24 +1,125 @@
 {% extends 'base_main.html' %}
 {% load static %}
 
-{% block ext_js %}
-    {{ block.super}}
-    <script type="text/javascript" src="{% static 'js/swiper.jquery.js' %}"></script>
+{% block ext_css %}
+    <link rel="stylesheet" href="{% static 'chuan/main/css/index.css' %}">
 {% endblock %}
 
 {% block header %}
-    {{ block.super}}
-    <div>op</div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6" style="height: 100px;">1</div>
-            <div class="col-md-3">2</div>
+    {{ block.super }}
+{% endblock %}
 
-            <div class="col-md-3 mark">3</div>
-            <div class="clearfix"></div>
-            <div class="col-md-3 col-md-offset-3 lead">4</div>
-            <div class="col-md-3 col-md-pull-2"><s>4</s></div>
-            <div class="col-md-3 col-md-push-3"><ins>45</ins></div>
+{% block content %}
+    <div class="index-content clear">
+        <div class="clear">
+            <div class="project-Carousel clear">
+                <div class="carousel slide" id="myCarousel">
+                    <ul class="carousel-indicators">
+                        <li class="active" data-target="#myCarousel" data-slide-to="0"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                        <li data-target="#myCarousel" data-slide-to="3"></li>
+                        <li data-target="#myCarousel" data-slide-to="4"></li>
+                    </ul>
+                    <div class="carousel-inner">
+                        {% for project in carousel %}
+                            {% if forloop.first %}
+                                <div class="item active">
+                                    <a href="{% url 'orders:project' %}?projectid={{ project.id }}" target="_blank">
+                                        <img src="{{ MEDIA_KEY_PREFIX }}{{ project.p_introImg }}">
+                                        <div class="carousel-caption">{{ project.p_title }}</div>
+                                    </a>
+                                </div>
+                            {% else %}
+                                <div class="item">
+                                    <a href="{% url 'orders:project' %}?projectid={{ project.id }}" target="_blank">
+                                        <img src="{{ MEDIA_KEY_PREFIX }}{{ project.p_introImg }}">
+                                        <div class="carousel-caption">{{ project.p_title }}</div>
+                                    </a>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+
+                    </div>
+                    <a class="left carousel-control" href="#myCarousel"
+                       data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+                    <a class="right carousel-control" href="#myCarousel"
+                       data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+                </div>
+            </div>
+
+            <div class="project-recommend clear">
+                <h3 class="recommend-tip">为你推荐</h3>
+                <div class="recommend-show">
+                    <ul>
+                        {% for project in recommend %}
+                            <li class="clear">
+                                <div class="recommend-img clear">
+                                    <a href="{% url 'orders:project' %}?projectid={{ project.id }}" target="_blank">
+                                        <img src="{{ MEDIA_KEY_PREFIX }}{{ project.p_introImg }}" alt="">
+                                    </a>
+                                </div>
+                                <div class="recommend-text clear">
+                                    <a href="{% url 'orders:project' %}?projectid={{ project.id }}"
+                                       target="_blank">{{ project.p_title }}</a>
+                                    <span>已筹集 {% widthratio project.p_already project.p_target 100 %}%</span>
+                                    <p>发起人： {{ project.p_merchant.m_merchantName }}</p>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="index-project">
+            <div class="smart">
+                <div class="title">新奇酷玩</div>
+            </div>
+            <div class="tab-div">
+                <div class="w-div cur-div">
+                    <ul class="tab-ul clear">
+                        {% for project in novelty %}
+                            <li>
+                                <div class="smart-img-area clear">
+                                    <a href="{% url 'orders:project' %}?projectid={{ project.id }}"
+                                       target="_blank">
+                                        <img src="{{ MEDIA_KEY_PREFIX }}{{ project.p_introImg }}" alt=""
+                                             style="width: 100%">
+                                    </a>
+                                </div>
+                                <div class="infor-box clear">
+                                    <div class="infor-top clear">
+                                        <a href="{% url 'orders:project' %}?projectid={{ project.id }}"
+                                           class="pro-name">{{ project.p_title }}</a>
+                                        <div class="title-box clear">
+                                            <a href="#">{{ project.p_classify }}</a>
+                                        </div>
+                                    </div>
+                                    <div class="infor-bottom clear">
+                                        <div class="process-area">
+                                            <div class="process-box">
+                                                <div class="process-full process-green"
+                                                     style="width: {% widthratio project.p_already project.p_target 100 %}%;"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="had-got-area">
+                                            <span>已达{% widthratio project.p_already project.p_target 100 %}% </span>|
+                                            <span>已筹 <span
+                                                    style="color: #ff6262;">{{ project.p_already }}</span> 元</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
+
+
+
 {% endblock %}

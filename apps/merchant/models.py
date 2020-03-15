@@ -19,27 +19,28 @@ class Merchant(models.Model):
 
 
 class Project(models.Model):
-    STATUS_CHOICES = (
-        ('readyto', '即将开始'),
-        ('funding', '众筹中'),
-        ('success', '众筹成功'),
-        ('failed', '众筹失败'),
-    )
     p_title = models.CharField(max_length=32, verbose_name='项目名称')
     p_introText = models.TextField(verbose_name='项目简介')
     p_classify = models.CharField(max_length=16, verbose_name='项目分类')
     p_introImg = models.ImageField(upload_to='project/%Y/%m/%d', verbose_name='简介图片')
-    p_detail = models.ImageField(upload_to='project/%Y/%m/%d', verbose_name='详细图片')
     p_days = models.IntegerField(default=30, verbose_name='众筹期限')
     p_follow = models.IntegerField(default=0, verbose_name='关注数')
     p_target = models.IntegerField(verbose_name='目标金额')
     p_already = models.IntegerField(default=0, verbose_name='已筹金额')
-    p_status = models.CharField(default='readyto', max_length=20, choices=STATUS_CHOICES, verbose_name='项目状态')
+    p_status = models.CharField(default='审核中', max_length=20, verbose_name='项目状态')
     p_merchant = models.ForeignKey(Merchant, on_delete=models.CASCADE, verbose_name='商家ID')
-
+    p_time = models.DateTimeField(auto_now_add=True, verbose_name='申请时间')
 
     class Meta:
         db_table = 'chuan_project'
+
+
+class ProjectDetail(models.Model):
+    p_project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name='项目ID')
+    p_detail = models.ImageField(upload_to='project/%Y/%m/%d', verbose_name='详细图片')
+
+    class Meta:
+        db_table = 'chuan_projectDetail'
 
 
 class Goods(models.Model):

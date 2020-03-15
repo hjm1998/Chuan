@@ -14,4 +14,6 @@ urlpatterns = [
     path('activate/', views.activate, name='activate'),
     path('mineorder/', views.mine_order, name='mine_order'),
     path('address/', views.address, name='address'),
+    path('deleteaddr/', views.deleteaddr, name='deleteaddr'),
+    path('defaultaddr/', views.defaultaddr, name='defaultaddr'),
 ]

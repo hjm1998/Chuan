@@ -1,3 +1,5 @@
+import datetime
+
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 
@@ -8,8 +10,8 @@ from Chuan.settings import MEDIA_KEY_PREFIX
 from merchant.models import Project, Goods
 from orders.models import Cart, Order, OrderGoods
 from orders.views_constant import ORDER_STATUS_NOT_RECEIVE, ORDER_STATUS_NOT_PAY, ORDER_STATUS_NOT_SEND
-from orders.views_helper import get_total_price, get_total_price_ordering
-from users.models import Address, AddressCopy
+from orders.views_helper import get_total_price, get_total_price_ordering, get_order_status, get_cart_num
+from users.models import Address, AddressCopy, Users
 
 
 def hello(request):
@@ -17,14 +19,43 @@ def hello(request):
 
 
 def project(request):
-    projects = Project.objects.get(pk=1)
+    projectid = request.GET.get('projectid')
+    projects = Project.objects.get(pk=projectid)
+    # 计算该用户发布项目总数
+    projects_count = Project.objects.filter(p_merchant_id=projects.p_merchant.id).count()
+    # 日期计算
+    endtime = (projects.p_time + datetime.timedelta(days=projects.p_days)).strftime("%Y-%m-%d")
+    endtimeStr = datetime.datetime.strptime(endtime, "%Y-%m-%d")
+    nowtime = datetime.datetime.now()
+    nowtimeStr = datetime.datetime.strptime(nowtime.strftime('%Y-%m-%d'), '%Y-%m-%d')
+    remaining = endtimeStr - nowtimeStr
     goods_list = Goods.objects.filter(g_project_id=projects.id)
+    # 项目支持人次计算
+    sold = 0
+    for goods in goods_list:
+        # 商品库存计算
+        goods.stock = goods.g_stock - goods.g_sold
+        sold = sold + goods.g_sold
+
     data = {
         'title': '项目',
         'projects': projects,
         'goods_list': goods_list,
-        'MEDIA_KEY_PREFIX': MEDIA_KEY_PREFIX
+        'MEDIA_KEY_PREFIX': MEDIA_KEY_PREFIX,
+        'sold': sold,
+        'year': endtimeStr.year,
+        'month': endtimeStr.month,
+        'day': endtimeStr.day,
+        'remaining': remaining.days,
+        'projects_count': projects_count,
     }
+
+    user_id = request.session.get('user_id')
+    if user_id:
+        user = Users.objects.get(pk=user_id)
+        data['username'] = user.u_username
+        data['is_login'] = True
+        data['cart_num'] = get_cart_num(user_id)
 
     return render(request, 'main/project.html', context=data)
 
@@ -72,6 +103,15 @@ def cart(request):
         'all_num': all_num,
         'message': '购物车'
     }
+
+    # 查询用户名
+    user_id = request.user.id
+    user = Users.objects.get(pk=user_id)
+    data['username'] = user.u_username
+    data['is_login'] = True
+    # 查询购物车数量
+    data['cart_num'] = get_cart_num(user_id)
+
     return render(request, 'orders/cart.html', context=data)
 
 
@@ -191,6 +231,12 @@ def ordering(request):
         'all_num': all_num
     }
 
+    # 查询用户名
+    user_id = request.user.id
+    user = Users.objects.get(pk=user_id)
+    data['username'] = user.u_username
+    data['is_login'] = True
+
     return render(request, 'orders/ordering.html', context=data)
 
 
@@ -204,6 +250,7 @@ def make_order(request):
                 c_goods__g_project_id=cart.c_goods.g_project_id).filter(c_is_select=True)
             order = Order()
             order.o_user = request.user
+            order.o_merchant = cart.c_goods.g_project.p_merchant
             order.o_price = get_total_price_ordering(request.user.id, cart.c_goods.g_project_id)
             order.save()
             addressid = request.GET.get('addressid')
@@ -223,30 +270,12 @@ def make_order(request):
                 orderGoods.save()
                 cart_obj.delete()
 
-    # order = Order()
-    # order.o_user = request.user
-    # order.o_price = get_total_price(request.user.id)
-    # order.save()
-    # addressid = request.GET.get('addressid')
-    # address = Address.objects.get(pk=addressid)
-    # address_copy = AddressCopy()
-    # address_copy.a_order = order
-    # address_copy.a_name = address.a_name
-    # address_copy.a_phone = address.a_phone
-    # address_copy.a_address = address.a_address
-    # address_copy.a_code = address.a_code
-    # address_copy.save()
-    # for cart_obj in carts:
-    #     orderGoods = OrderGoods()
-    #     orderGoods.o_order = order
-    #     orderGoods.o_goods_num = cart_obj.c_goods_num
-    #     orderGoods.o_goods = cart_obj.c_goods
-    #     orderGoods.save()
-    #     cart_obj.delete()
     data = {
         'status': 200,
         'msg': 'ok',
+        'order_id': order.id
     }
+
     return JsonResponse(data=data)
 
 
@@ -258,8 +287,17 @@ def order_detail(request):
         'title': '订单详细',
         'order': order,
         'address': address,
+        'status': get_order_status(order.o_status),
         'MEDIA_KEY_PREFIX': MEDIA_KEY_PREFIX
     }
+
+    # 查询用户名
+    user_id = request.user.id
+    user = Users.objects.get(pk=user_id)
+    data['username'] = user.u_username
+    data['is_login'] = True
+    # 查询订单数量
+    data['cart_num'] = get_cart_num(user_id)
     return render(request, 'orders/orderdetail.html', context=data)
 
 
@@ -278,6 +316,7 @@ def payed(request):
     order = Order.objects.get(pk=order_id)
     order.o_status = ORDER_STATUS_NOT_SEND
     goods = order.ordergoods_set.all().filter(o_order=order_id)
+
     for good in goods:
         # 项目表p_already 已筹金额更新
         project_obj = Project.objects.get(pk=good.o_goods.g_project_id)
@@ -285,7 +324,7 @@ def payed(request):
         project_obj.save()
         # 商品表g_stock 库存更新
         good_obj = Goods.objects.get(pk=good.o_goods_id)
-        good_obj.g_stock -= good.o_goods_num
+        good_obj.g_sold += 1
         good_obj.save()
     order.save()
     data = {
